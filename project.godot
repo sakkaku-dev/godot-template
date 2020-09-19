@@ -1,0 +1,49 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "WAT",
+"language": "GDScript",
+"path": "res://addons/WAT/namespace.gd"
+}, {
+"base": "",
+"class": "WATTest",
+"language": "GDScript",
+"path": "res://addons/WAT/core/test/test.gd"
+} ]
+_global_script_class_icons={
+"WAT": "",
+"WATTest": ""
+}
+
+[WAT]
+
+Test_Directory="res://tests"
+Results_Directory="res://tests/results/WAT"
+Minimize_Window_When_Running_Tests=false
+TestStrategy={
+
+}
+Tags=PoolStringArray(  )
+Display=8
+
+[application]
+
+config/name="rpg-arena"
+config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "WAT" )
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
