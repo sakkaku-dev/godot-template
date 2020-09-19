@@ -12,7 +12,7 @@ jobs:
       image: barichello/godot-ci:3.2.3
     steps:
       - name: Unit Test
-        run: godot addons/WAT/cli.tscn -run_dir=res://tests/unit --verbose
+        run: godot addons/WAT/cli.tscn -run_dir=res://tests/unit
       - name: Upload Test Results
         uses: actions/upload-artifact@v2
         with:
