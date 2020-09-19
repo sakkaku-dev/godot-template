@@ -23,6 +23,7 @@ jobs:
   export-windows:
     name: Windows Export
     runs-on: ubuntu-latest
+    needs: tests
     container:
       image: barichello/godot-ci:3.2.3
     steps:
@@ -44,6 +45,7 @@ jobs:
   export-linux:
     name: Linux Export
     runs-on: ubuntu-latest
+    needs: tests
     container:
       image: barichello/godot-ci:3.2.3
     steps:
