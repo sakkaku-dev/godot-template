@@ -38,7 +38,7 @@ Display=8
 
 [application]
 
-config/name="rpg-arena"
+config/name="godot-template"
 config/icon="res://icon.png"
 
 [editor_plugins]
