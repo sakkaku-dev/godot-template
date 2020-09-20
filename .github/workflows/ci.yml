@@ -112,9 +112,9 @@ jobs:
   notify-failure:
     name: Notify Failure to Discord
     runs-on: ubuntu-latest
-    if: failure()
     steps:
       - name: Notify Failure
+        if: ${{ failure() }}
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
