@@ -109,3 +109,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: build/web # The folder the action should deploy.
+  notifiy-failure:
+    name: Notify Failure to Discord
+    runs-on: ubuntu-latest
+    if: failure()
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+    uses: Ilshidur/action-discord@master
+    with:
+      args: "Latest Build failed"
