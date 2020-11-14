@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "Mockito",
+"language": "GDScript",
+"path": "res://tests/helper/Mockito.gd"
+}, {
+"base": "Reference",
 "class": "WAT",
 "language": "GDScript",
 "path": "res://addons/WAT/namespace.gd"
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://addons/WAT/core/test/test.gd"
 } ]
 _global_script_class_icons={
+"Mockito": "",
 "WAT": "",
 "WATTest": ""
 }

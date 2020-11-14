@@ -36,7 +36,7 @@ jobs:
       - name: Export
         run: |
           mkdir -v -p build/win
-          godot -v --export "Windows Desktop" ./build/win/main.exe
+          godot -v --export "Windows" ./build/win/main.exe
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -58,7 +58,7 @@ jobs:
       - name: Export
         run: |
           mkdir -v -p build/linux
-          godot -v --export "Linux/X11" ./build/linux/main.x86_64
+          godot -v --export "Linux" ./build/linux/main.x86_64
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
