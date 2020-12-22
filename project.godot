@@ -9,25 +9,19 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
-"class": "Mockito",
+"base": "UnitTest",
+"class": "IntegrationTest",
 "language": "GDScript",
-"path": "res://tests/helper/Mockito.gd"
+"path": "res://tests/IntegrationTest.gd"
 }, {
-"base": "Reference",
-"class": "WAT",
+"base": "Node",
+"class": "PlayerInput",
 "language": "GDScript",
-"path": "res://addons/WAT/namespace.gd"
-}, {
-"base": "",
-"class": "WATTest",
-"language": "GDScript",
-"path": "res://addons/WAT/core/test/test.gd"
+"path": "res://scripts/PlayerInput.gd"
 } ]
 _global_script_class_icons={
-"Mockito": "",
-"WAT": "",
-"WATTest": ""
+"IntegrationTest": "",
+"PlayerInput": ""
 }
 
 [WAT]

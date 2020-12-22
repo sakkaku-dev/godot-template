@@ -1,0 +1,16 @@
+{
+  "dirs": ["res://tests/unit/", "res://tests/integration/", "res://tests/e2e"],
+  "double_strategy": "partial",
+  "ignore_pause": false,
+  "include_subdirs": true,
+  "inner_class": "",
+  "log_level": 3,
+  "opacity": 100,
+  "prefix": "",
+  "selected": "",
+  "should_exit": true,
+  "should_maximize": true,
+  "suffix": "Test.gd",
+  "tests": [],
+  "unit_test_name": ""
+}

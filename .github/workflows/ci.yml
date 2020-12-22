@@ -14,12 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Unit Test
-        run: godot addons/WAT/cli.tscn -run_dir=res://tests/unit
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: tests/results
+        run: godot -s addons/gut/gut_cmdln.gd
   export-windows:
     name: Windows Export
     runs-on: ubuntu-latest
