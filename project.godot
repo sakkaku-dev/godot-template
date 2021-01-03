@@ -9,19 +9,55 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "UnitTest",
-"class": "IntegrationTest",
+"base": "PlayerInput",
+"class": "EmptyPlayerInput",
 "language": "GDScript",
-"path": "res://tests/IntegrationTest.gd"
+"path": "res://scripts/input/EmptyPlayerInput.gd"
+}, {
+"base": "Control",
+"class": "Focusable",
+"language": "GDScript",
+"path": "res://scripts/gui/Focusable.gd"
 }, {
 "base": "Node",
+"class": "Health",
+"language": "GDScript",
+"path": "res://scripts/Health.gd"
+}, {
+"base": "Node",
+"class": "InputReader",
+"language": "GDScript",
+"path": "res://scripts/input/InputReader.gd"
+}, {
+"base": "Focusable",
+"class": "PlayerFocus",
+"language": "GDScript",
+"path": "res://scripts/gui/PlayerFocus.gd"
+}, {
+"base": "InputReader",
 "class": "PlayerInput",
 "language": "GDScript",
-"path": "res://scripts/PlayerInput.gd"
+"path": "res://scripts/input/PlayerInput.gd"
+}, {
+"base": "UnitTest",
+"class": "SceneTest",
+"language": "GDScript",
+"path": "res://tests/SceneTest.gd"
+}, {
+"base": "Node",
+"class": "UnitTest",
+"language": "GDScript",
+"path": "res://tests/UnitTest.gd"
 } ]
 _global_script_class_icons={
-"IntegrationTest": "",
-"PlayerInput": ""
+"EmptyPlayerInput": "",
+"Focusable": "",
+"Health": "",
+"InputReader": "",
+"PlayerFocus": "",
+"PlayerInput": "",
+"SceneTest": "",
+"UnitTest": ""
 }
 
 [WAT]
@@ -39,11 +75,12 @@ Display=8
 [application]
 
 config/name="godot-template"
+run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "WAT" )
+enabled=PoolStringArray(  )
 
 [rendering]
 

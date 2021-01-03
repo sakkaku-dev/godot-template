@@ -1,6 +1,6 @@
 extends UnitTest
 
-class_name IntegrationTest
+class_name SceneTest
 
 var root: Node
 
