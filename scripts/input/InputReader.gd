@@ -9,10 +9,8 @@ class_name InputReader
 const MOVE_LEFT := "move_left"
 const MOVE_RIGHT := "move_right"
 const JUMP := "jump"
-const ATTACK := "attack"
-const CROUCH := "crouch"
 
-const input_types = [MOVE_RIGHT, MOVE_LEFT, JUMP, ATTACK, CROUCH]
+const input_types = [MOVE_RIGHT, MOVE_LEFT, JUMP]
 
 var just_pressed = []
 var inputs = []
@@ -32,10 +30,13 @@ func handle_input(event: InputEvent) -> void:
 
 	# TODO: handle joypad move events
 	if event.is_action_pressed(action):
-		if not inputs.has(action): inputs.append(action)
-		if not just_pressed.has(action): just_pressed.append(action)
+		if not inputs.has(action):
+			inputs.append(action)
+		if not just_pressed.has(action):
+			just_pressed.append(action)
 	if event.is_action_released(action):
-		if inputs.has(action): inputs.erase(action)
+		if inputs.has(action):
+			inputs.erase(action)
 
 
 func _process(delta):
