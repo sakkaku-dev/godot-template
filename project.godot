@@ -22,7 +22,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Health",
 "language": "GDScript",
-"path": "res://scripts/Health.gd"
+"path": "res://scripts/combat/Health.gd"
+}, {
+"base": "Area2D",
+"class": "HurtBox",
+"language": "GDScript",
+"path": "res://scripts/combat/HurtBox.gd"
 }, {
 "base": "Node",
 "class": "InputReader",
@@ -53,6 +58,7 @@ _global_script_class_icons={
 "EmptyPlayerInput": "",
 "Focusable": "",
 "Health": "",
+"HurtBox": "",
 "InputReader": "",
 "PlayerFocus": "",
 "PlayerInput": "",

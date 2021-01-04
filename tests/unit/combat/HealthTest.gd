@@ -1,8 +1,10 @@
 extends UnitTest
 
-class TestHealthUsage extends UnitTest:
+
+class TestHealthUsage:
+	extends UnitTest
 	var health: Health
-	
+
 	func before_each():
 		health = autofree(Health.new())
 		health.max_health = 5
@@ -10,24 +12,25 @@ class TestHealthUsage extends UnitTest:
 
 	func test_initialize_health():
 		assert_eq(health.health, 5)
-		
+
 	func test_reduce_health():
 		health.reduce(2)
 		assert_eq(health.health, 3)
-		
+
 	func test_increase_health():
 		health.max_health = 10
 		health.increase(3)
 		assert_eq(health.health, 8)
 
 
-class TestHealthSetterEmitter extends UnitTest:
+class TestHealthSetterEmitter:
+	extends UnitTest
 	var health: Health
-	
+
 	func before_each():
 		health = autofree(Health.new())
 		watch_signals(health)
-	
+
 	func test_set_health():
 		health.health = 2
 		assert_eq(health.health, 2)
