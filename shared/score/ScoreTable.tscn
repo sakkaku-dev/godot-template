@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://shared/score/TableContainer.gd" type="Script" id=1]
+[ext_resource path="res://shared/score/ScoreTable.gd" type="Script" id=2]
+
+
+[node name="ScoreTable" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 20
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_right = 1024.0
+margin_bottom = 14.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreRequest" type="HTTPRequest" parent="."]
+
+[node name="Table" type="GridContainer" parent="."]
+margin_top = 34.0
+margin_right = 1024.0
+margin_bottom = 34.0
+script = ExtResource( 1 )
+headers = [ "Score", "User", "Time" ]
+
+[node name="Score" type="Label" parent="."]
+margin_top = 54.0
+margin_right = 1024.0
+margin_bottom = 68.0
+align = 1
+
+[node name="SubmitInput" type="HBoxContainer" parent="."]
+margin_top = 88.0
+margin_right = 1024.0
+margin_bottom = 112.0
+custom_constants/separation = 20
+
+[node name="Name" type="LineEdit" parent="SubmitInput"]
+margin_right = 908.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Submit" type="Button" parent="SubmitInput"]
+margin_left = 928.0
+margin_right = 1024.0
+margin_bottom = 24.0
+text = "Submit Score"
+[connection signal="request_completed" from="ScoreRequest" to="." method="_on_ScoreRequest_request_completed"]
+[connection signal="pressed" from="SubmitInput/Submit" to="." method="_on_Submit_pressed"]

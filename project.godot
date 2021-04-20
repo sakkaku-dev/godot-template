@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "PlayerInput",
 "class": "EmptyPlayerInput",
 "language": "GDScript",
-"path": "res://scripts/input/EmptyPlayerInput.gd"
+"path": "res://shared/input/EmptyPlayerInput.gd"
 }, {
 "base": "Control",
 "class": "Focusable",
@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "InputReader",
 "language": "GDScript",
-"path": "res://scripts/input/InputReader.gd"
+"path": "res://shared/input/InputReader.gd"
 }, {
 "base": "Focusable",
 "class": "PlayerFocus",
@@ -42,12 +42,17 @@ _global_script_classes=[ {
 "base": "InputReader",
 "class": "PlayerInput",
 "language": "GDScript",
-"path": "res://scripts/input/PlayerInput.gd"
+"path": "res://shared/input/PlayerInput.gd"
 }, {
 "base": "UnitTest",
 "class": "SceneTest",
 "language": "GDScript",
 "path": "res://tests/SceneTest.gd"
+}, {
+"base": "GridContainer",
+"class": "TableContainer",
+"language": "GDScript",
+"path": "res://shared/score/TableContainer.gd"
 }, {
 "base": "Node",
 "class": "UnitTest",
@@ -63,6 +68,7 @@ _global_script_class_icons={
 "PlayerFocus": "",
 "PlayerInput": "",
 "SceneTest": "",
+"TableContainer": "",
 "UnitTest": ""
 }
 

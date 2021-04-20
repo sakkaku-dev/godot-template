@@ -31,6 +31,3 @@ func handle_input(event: InputEvent) -> void:
 		return
 	
 	.handle_input(event)
-
-func get_move_vector() -> Vector2:
-	return Vector2(get_action_strength(MOVE_RIGHT) - get_action_strength(MOVE_LEFT), 0)

@@ -1,34 +1,28 @@
 extends Node
 
 """
-Reads InputEvents and tracks which inputs are pressed
+Reads InputEvents and tracks which inputs are pressed for all devices
 """
 
 class_name InputReader
 
-const MOVE_LEFT := "move_left"
-const MOVE_RIGHT := "move_right"
-const JUMP := "jump"
-
-const input_types = [MOVE_RIGHT, MOVE_LEFT, JUMP]
+var input_types = InputMap.get_actions()
 
 var just_pressed = []
 var inputs = []
-
-var action_strength = {
-	MOVE_LEFT: 0,
-	MOVE_RIGHT: 0,
-}
+var action_strength = {}
 
 
-func handle_input(event: InputEvent) -> void:
+func handle_input(event: InputEvent):
 	_update_action_strength(event)
 
-	var action = _get_action_for_event(event)
-	if action == "":
-		return
+	var actions = _get_actions_for_event(event)
+	
+	for action in actions:
+		_register_action(event, action)
 
-	# TODO: handle joypad move events
+
+func _register_action(event: InputEvent, action: String):
 	if event.is_action_pressed(action):
 		if not inputs.has(action):
 			inputs.append(action)
@@ -39,29 +33,34 @@ func handle_input(event: InputEvent) -> void:
 			inputs.erase(action)
 
 
-func _process(delta):
+func _process(_delta):
 	just_pressed = []
 
 
 func _update_action_strength(event: InputEvent) -> void:
-	for k in action_strength.keys():
+	for k in input_types:
 		if event.is_action(k):
 			action_strength[k] = event.get_action_strength(k)
 
 
-func _get_action_for_event(event: InputEvent) -> String:
+func _get_actions_for_event(event: InputEvent) -> Array:
+	var actions = []
 	for action in input_types:
 		if event.is_action(action):
-			return action
+			actions.append(action)
 
-	return ""
+	return actions
 
 
-func is_pressed(keys: Array) -> bool:
+func is_pressed_any(keys: Array) -> bool:
 	for k in keys:
-		if not inputs.has(k):
-			return false
-	return true
+		if inputs.has(k):
+			return true
+	return false
+
+
+func is_pressed(key: String) -> bool:
+	return inputs.has(key)
 
 
 func is_just_pressed(key: String) -> bool:
