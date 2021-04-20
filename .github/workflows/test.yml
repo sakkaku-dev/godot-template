@@ -1,0 +1,17 @@
+name: Test
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:3.2.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Unit Test
+        run: godot -s addons/gut/gut_cmdln.gd
