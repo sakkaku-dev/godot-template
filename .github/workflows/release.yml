@@ -19,15 +19,15 @@ jobs:
       - run: |
           mkdir -v -p build/win
           godot -v --export "Windows" ./build/win/main.exe
-          cd build/ && zip -r windows.zip ./win/*
+          cd build/win && zip -r windows.zip *
       - run: |
           mkdir -v -p build/linux
           godot -v --export "Linux" ./build/linux/main.x86_64
-          cd build/ && zip -r linux.zip ./linux/*
+          cd build/linux && zip -r linux.zip *
       - uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            build/windows.zip
-            build/linux.zip
+            build/win/windows.zip
+            build/linux/linux.zip
