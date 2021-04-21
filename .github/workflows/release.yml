@@ -6,27 +6,28 @@ on:
   #   branches: [master]
 
 jobs:
-  name: Release Desktop Versions
-  runs-on: ubuntu-latest
-  container:
-    image: barichello/godot-ci:3.2.3
-  steps:
-    - uses: actions/checkout@v1
-    - run: |
-        mkdir -v -p ~/.local/share/godot/templates
-        mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-    - run: |
-        mkdir -v -p build/win
-        godot -v --export "Windows" ./build/win/main.exe
-        zip -r windows.zip ./build/win/*
-    - run: |
-        mkdir -v -p build/linux
-        godot -v --export "Linux" ./build/linux/main.x86_64
-        zip -r linux.zip ./build/linux/*
-    - uses: softprops/action-gh-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        files: |
-          windows.zip
-          linux.zip
+  release:
+    name: Release Desktop Versions
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:3.2.3
+    steps:
+      - uses: actions/checkout@v1
+      - run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - run: |
+          mkdir -v -p build/win
+          godot -v --export "Windows" ./build/win/main.exe
+          zip -r windows.zip ./build/win/*
+      - run: |
+          mkdir -v -p build/linux
+          godot -v --export "Linux" ./build/linux/main.x86_64
+          zip -r linux.zip ./build/linux/*
+      - uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            windows.zip
+            linux.zip
