@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://shared/misc/FreeOnExit.gd" type="Script" id=1]
+
+[node name="FreeOnExit" type="VisibilityNotifier2D"]
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+[connection signal="screen_exited" from="." to="." method="_on_FreeOnExit_screen_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
