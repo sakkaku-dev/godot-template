@@ -29,7 +29,7 @@ jobs:
           USER: ${{secrets.ITCHIO_USER}}
           GAME: test-game # Change game name
         run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion ${GITHUB_REF/refs\/tags\//}
-      - run: scripts/package.sh
+      - run: scripts/package.sh $CHANNEL
         if: env.PUBLISH
       - uses: softprops/action-gh-release@v1
         if: env.PUBLISH
