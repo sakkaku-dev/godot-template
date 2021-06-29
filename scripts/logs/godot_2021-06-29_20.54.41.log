@@ -1,0 +1,55 @@
+Godot Engine v3.3.stable.arch_linux - https://godotengine.org
+XInput: Refreshing devices.
+XInput: No touch devices found.
+Detecting GPUs, set DRI_PRIME in the environment to override GPU detection logic.
+Only one GPU found, using default.
+XcursorGetTheme could not get cursor theme
+Failed loading custom cursor: X_cursor
+Using GLES3 video driver
+OpenGL ES 3.0 Renderer: Radeon RX 580 Series (POLARIS10, DRM 3.40.0, 5.10.42-1-MANJARO, LLVM 11.1.0)
+OpenGL ES Batching: ON
+	OPTIONS
+	max_join_item_commands 16
+	colored_vertex_format_threshold 0.25
+	batch_buffer_size 16384
+	light_scissor_area_threshold 1
+	item_reordering_lookahead 4
+	light_max_join_items 32
+	single_rect_fallback False
+	debug_flash False
+	diagnose_frame False
+PulseAudio: detected 2 channels
+PulseAudio: audio buffer frames: 512 calculated latency: 11ms
+JoypadLinux: udev enabled and loaded successfully.
+ 
+CORE API HASH: 18186542958999730904
+EDITOR API HASH: 13362584815843114935
+Construct gdnative interface
+
+Destruct gdnative interface
+
+Class 'BulletPhysicsDirectBodyState' is not exposed, skipping.
+Class 'BulletPhysicsDirectSpaceState' is not exposed, skipping.
+Class 'BulletPhysicsServer' is not exposed, skipping.
+Class 'GDScriptNativeClass' is not exposed, skipping.
+Class 'IP_Unix' is not exposed, skipping.
+Class 'InputDefault' is not exposed, skipping.
+Class 'Physics2DDirectBodyStateSW' is not exposed, skipping.
+Class 'Physics2DDirectSpaceStateSW' is not exposed, skipping.
+Class 'Physics2DServerSW' is not exposed, skipping.
+Loading resource: /home/sakkaku/.config/godot/editor_settings-3.tres
+**ERROR**: Class 'EditorSettings' can only be instantiated by editor.
+   At: core/class_db.cpp:555:instance() - Class 'EditorSettings' can only be instantiated by editor.
+**ERROR**: /home/sakkaku/.config/godot/editor_settings-3.tres:3 - Parse Error: Can't create sub resource of type: EditorSettings
+   At: scene/resources/resource_format_text.cpp:565:poll() - /home/sakkaku/.config/godot/editor_settings-3.tres:3 - Parse Error: Can't create sub resource of type: EditorSettings
+**ERROR**: Failed to load resource '/home/sakkaku/.config/godot/editor_settings-3.tres'.
+   At: core/io/resource_loader.cpp:208:load() - Condition "err != OK" is true. Returned: RES()
+**ERROR**: Failed loading resource: /home/sakkaku/.config/godot/editor_settings-3.tres. Make sure resources have been imported by opening the project in the editor at least once.
+   At: core/io/resource_loader.cpp:278:_load() - Condition "found" is true. Returned: RES()
+**WARNING**: Could not open config file.
+   At: editor/editor_settings.cpp:989:create() - Could not open config file.
+Loaded builtin certs
+EditorSettings: Save OK!
+**ERROR**: Invalid export preset name: win. Make sure `export_presets.cfg` is present in the current directory.
+   At: editor/editor_node.cpp:755:_fs_changed() - Invalid export preset name: win. Make sure `export_presets.cfg` is present in the current directory.
+EditorSettings: Save OK!
