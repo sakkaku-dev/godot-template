@@ -1,9 +1,15 @@
 #!/bin/sh
 
 PLATFORM=$1
+GAME=$2
 
 if [ -z $PLATFORM ]; then
     echo "Platform not specified"
+    exit
+fi
+
+if [ -z $GAME ] && [ $PLATFORM = 'mac' ]; then
+    echo "Game name not specified. Needed for mac build."
     exit
 fi
 
@@ -17,7 +23,7 @@ elif [ $PLATFORM = 'win' ]; then
 elif [ $PLATFORM = 'linux' ]; then
     FILE="main.x86_64"
 elif [ $PLATFORM = 'mac' ]; then
-    FILE="mac.zip"
+    FILE="$GAME-mac.zip"
 fi
 
 mkdir -v -p build/$PLATFORM
