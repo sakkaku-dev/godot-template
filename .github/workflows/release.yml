@@ -16,21 +16,23 @@ jobs:
         channel: [win, linux, mac, web] # Remove channel if not releasing
     env:
       CHANNEL: ${{matrix.channel}}
+      PUBLISH: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v1
       - run: scripts/prepare.sh
       - run: scripts/build.sh $CHANNEL
       - name: Publish Itch
-        if: startsWith(github.ref, 'refs/tags/') && env.BUTLER_API_KEY && env.USER && env.GAME
+        if: env.PUBLISH && env.BUTLER_API_KEY && env.USER && env.GAME
         shell: bash
         env:
           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
           USER: ${{secrets.ITCHIO_USER}}
           GAME: test-game # Change game name
         run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion ${GITHUB_REF/refs\/tags\//}
+      - run: scripts/package.sh
+        if: env.PUBLISH
       - uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        run: scripts/package.sh
+        if: env.PUBLISH
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
