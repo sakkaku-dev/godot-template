@@ -33,5 +33,5 @@ jobs:
         env:
           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
           USER: ${{secrets.ITCHIO_USER}}
-          GAME: test-game
+          GAME: test-game # Change game name
         run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion ${GITHUB_REF/refs\/tags\//}

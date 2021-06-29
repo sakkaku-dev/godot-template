@@ -2,14 +2,14 @@
 
 PLATFORM=$1
 
-if [[ -z $PLATFORM ]]; then
+if [ -z $PLATFORM ]; then
     echo "Platform not specified"
     exit
 fi
 
 mkdir -v -p build/$PLATFORM
-godot -v --export "$PLATFORM"
+godot -v --export "$PLATFORM" build/$PLATFORM/$PLATFORM
 
-if [[ "$PLATFORM" != "mac" ]]; then
+if [ "$PLATFORM" != "mac" ]; then
     cd build/$PLATFORM && zip -r $PLATFORM.zip *
 fi

@@ -4,7 +4,7 @@ VERSION=${GODOT_VERSION:-$1}
 
 TARGET=~/.local/share/godot/templates/${VERSION}.stable
 
-if [[ -f "$TARGET" ]]; then
+if [ -f "$TARGET" ]; then
     echo "Templates already installed"
     exit
 fi
