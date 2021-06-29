@@ -1,3 +1,5 @@
+#!/bin/sh
+
 VERSION=${GODOT_VERSION:-$1}
 
 TARGET=~/.local/share/godot/templates/${VERSION}.stable

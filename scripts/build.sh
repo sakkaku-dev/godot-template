@@ -1,3 +1,5 @@
+#!/bin/sh
+
 PLATFORM=$1
 
 if [[ -z $PLATFORM ]]; then
