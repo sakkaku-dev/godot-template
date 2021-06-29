@@ -29,7 +29,7 @@ jobs:
     name: Publish to itch.io
     runs-on: ubuntu-latest
     needs: export-web
-    if: secrets.BUTLER_API_KEY != ''
+    if: ${{ secrets.BUTLER_API_KEY != '' }}
     steps:
       - name: Download export-web artifact
         uses: actions/download-artifact@v2
