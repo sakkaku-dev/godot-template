@@ -20,13 +20,6 @@ jobs:
       - uses: actions/checkout@v1
       - run: scripts/prepare.sh
       - run: scripts/build.sh $CHANNEL
-      - uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          files: |
-            build/$CHANNEL/$CHANNEL.zip
       - name: Publish Itch
         if: startsWith(github.ref, 'refs/tags/') && env.BUTLER_API_KEY && env.USER && env.GAME
         shell: bash
@@ -35,3 +28,11 @@ jobs:
           USER: ${{secrets.ITCHIO_USER}}
           GAME: test-game # Change game name
         run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion ${GITHUB_REF/refs\/tags\//}
+      - uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        run: scripts/package.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            build/$CHANNEL/$CHANNEL.zip
