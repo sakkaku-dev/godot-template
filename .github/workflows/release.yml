@@ -28,11 +28,11 @@ jobs:
           files: |
             build/$CHANNEL/$CHANNEL.zip
       - name: Publish Itch
-        if: startsWith(github.ref, 'refs/tags/') && env.BUTLER_API_KEY != '' && env.USER
+        if: startsWith(github.ref, 'refs/tags/') && env.BUTLER_API_KEY && env.USER && env.GAME
         shell: bash
         env:
           VERSION: ${GITHUB_REF/refs\/tags\//}
           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
           USER: ${{secrets.ITCHIO_USER}}
-          GAME: ${{secrets.ITCHIO_GAME}}
+          GAME: test-game
         run: butler push build/web $USER/$GAME:$CHANNEL --userversion $VERSION
