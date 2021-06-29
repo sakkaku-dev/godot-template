@@ -11,12 +11,7 @@ jobs:
       image: barichello/godot-ci:3.2.3
     steps:
       - uses: actions/checkout@v1
-      - run: |
-          mkdir -v -p ~/.local/share/godot/templates
-          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - run: |
-          mkdir -v -p build/web
-          godot -v --export "HTML5" ./build/web/index.html
+      - run: scripts/prepare.sh && scripts/build.sh web
       - run: apt-get update && apt-get install -y rsync # is needed in order to deploy to GitHub Pages.
       - uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

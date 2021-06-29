@@ -1,10 +1,13 @@
-mkdir -v -p build/win
-godot -v --export "Windows" ./build/win/main.exe
-cd build/win && zip -r windows.zip *
+PLATFORM=$1
 
-mkdir -v -p build/linux
-godot -v --export "Linux" ./build/linux/main.x86_64
-cd build/linux && zip -r linux.zip *
+if [[ -z $PLATFORM ]]; then
+    echo "Platform not specified"
+    exit
+fi
 
-mkdir -v -p build/mac
-godot -v --export "Mac OSX"
+mkdir -v -p build/$PLATFORM
+godot -v --export "$PLATFORM"
+
+if [[ "$PLATFORM" != "mac" ]]; then
+    cd build/$PLATFORM && zip -r $PLATFORM.zip *
+fi

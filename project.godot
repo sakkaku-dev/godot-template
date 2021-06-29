@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://shared/input/EmptyPlayerInput.gd"
 }, {
-"base": "Control",
-"class": "Focusable",
-"language": "GDScript",
-"path": "res://scripts/gui/Focusable.gd"
-}, {
 "base": "Node",
 "class": "Health",
 "language": "GDScript",
@@ -48,11 +43,6 @@ _global_script_classes=[ {
 "class": "MoveForwardState",
 "language": "GDScript",
 "path": "res://shared/state/MoveForwardState.gd"
-}, {
-"base": "Focusable",
-"class": "PlayerFocus",
-"language": "GDScript",
-"path": "res://scripts/gui/PlayerFocus.gd"
 }, {
 "base": "InputReader",
 "class": "PlayerInput",
@@ -91,14 +81,12 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "EmptyPlayerInput": "",
-"Focusable": "",
 "Health": "",
 "HitBox": "",
 "HurtBox": "",
 "InputReader": "",
 "MouseFollowState": "",
 "MoveForwardState": "",
-"PlayerFocus": "",
 "PlayerInput": "",
 "RandomMove": "",
 "SceneTest": "",
