@@ -123,7 +123,7 @@ Display=8
 [application]
 
 config/name="godot-template"
-run/main_scene="res://scenes/Game.tscn"
+run/main_scene="res://scenes/splashscreen/SplashScreen.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
