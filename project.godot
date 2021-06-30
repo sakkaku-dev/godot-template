@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "PlayerInput",
-"class": "EmptyPlayerInput",
-"language": "GDScript",
-"path": "res://shared/input/EmptyPlayerInput.gd"
-}, {
 "base": "Node",
 "class": "Health",
 "language": "GDScript",
@@ -80,7 +75,6 @@ _global_script_classes=[ {
 "path": "res://tests/UnitTest.gd"
 } ]
 _global_script_class_icons={
-"EmptyPlayerInput": "",
 "Health": "",
 "HitBox": "",
 "HurtBox": "",
