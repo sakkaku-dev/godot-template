@@ -14,5 +14,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Unit Test
-        run: godot -s addons/gut/gut_cmdln.gd
+        run: scripts/test.sh
         timeout-minutes: 5
