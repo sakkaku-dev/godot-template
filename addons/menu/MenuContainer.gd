@@ -1,5 +1,6 @@
-extends Control
+extends Menu
 
+class_name MenuContainer
 
 func _ready():
 	for c in get_children():
@@ -10,3 +11,4 @@ func _hide_other(node: Control) -> void:
 		for c in get_children():
 			if c != node:
 				c.hide()
+
