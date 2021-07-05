@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "FocusContainer",
+"language": "GDScript",
+"path": "res://addons/components/focus/FocusContainer.gd"
+}, {
+"base": "Control",
+"class": "Focusable",
+"language": "GDScript",
+"path": "res://addons/components/focus/Focusable.gd"
+}, {
 "base": "Node",
 "class": "Health",
 "language": "GDScript",
@@ -29,15 +39,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://shared/input/InputReader.gd"
 }, {
-"base": "Control",
+"base": "FocusContainer",
 "class": "Menu",
 "language": "GDScript",
-"path": "res://addons/menu/Menu.gd"
+"path": "res://addons/components/menu/Menu.gd"
 }, {
 "base": "Menu",
 "class": "MenuContainer",
 "language": "GDScript",
-"path": "res://addons/menu/MenuContainer.gd"
+"path": "res://addons/components/menu/MenuContainer.gd"
 }, {
 "base": "Node",
 "class": "MouseFollowState",
@@ -49,10 +59,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://shared/state/MoveForwardState.gd"
 }, {
+"base": "Focusable",
+"class": "PlayerFocus",
+"language": "GDScript",
+"path": "res://addons/components/focus/PlayerFocus.gd"
+}, {
 "base": "InputReader",
 "class": "PlayerInput",
 "language": "GDScript",
 "path": "res://shared/input/PlayerInput.gd"
+}, {
+"base": "Reference",
+"class": "PlayerManager",
+"language": "GDScript",
+"path": "res://addons/components/PlayerManager.gd"
 }, {
 "base": "Node2D",
 "class": "RandomMove",
@@ -85,6 +105,8 @@ _global_script_classes=[ {
 "path": "res://tests/UnitTest.gd"
 } ]
 _global_script_class_icons={
+"FocusContainer": "",
+"Focusable": "",
 "Health": "",
 "HitBox": "",
 "HurtBox": "",
@@ -93,7 +115,9 @@ _global_script_class_icons={
 "MenuContainer": "",
 "MouseFollowState": "",
 "MoveForwardState": "",
+"PlayerFocus": "",
 "PlayerInput": "",
+"PlayerManager": "",
 "RandomMove": "",
 "SceneTest": "",
 "Spawner": "",

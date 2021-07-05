@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/components/slide-select/right.png" type="Texture" id=2]
+[ext_resource path="res://addons/components/slide-select/left.png" type="Texture" id=3]
+[ext_resource path="res://addons/components/slide-select/SlideSelect.gd" type="Script" id=4]
+
+[node name="SlideSelect" type="HBoxContainer"]
+margin_right = 1010.0
+margin_bottom = 100.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PrevButton" type="TextureButton" parent="."]
+margin_right = 100.0
+margin_bottom = 100.0
+texture_normal = ExtResource( 3 )
+stretch_mode = 4
+
+[node name="Labels" type="CenterContainer" parent="."]
+margin_left = 104.0
+margin_right = 906.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextButton" type="TextureButton" parent="."]
+margin_left = 910.0
+margin_right = 1010.0
+margin_bottom = 100.0
+texture_normal = ExtResource( 2 )
+
+[connection signal="pressed" from="PrevButton" to="." method="prev_value"]
+[connection signal="pressed" from="NextButton" to="." method="next_value"]
