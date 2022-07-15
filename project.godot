@@ -154,6 +154,10 @@ window/size/height=1080
 
 enabled=PoolStringArray(  )
 
+[gui]
+
+theme/custom="res://theme/theme.tres"
+
 [input]
 
 move_left={
