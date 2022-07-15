@@ -1,11 +1,19 @@
 extends Control
 
-onready var background := $Background
-onready var color = ProjectSettings.get_setting("application/boot_splash/bg_color")
+export var next_screen: PackedScene
+
+onready var tween: TweenEffect = $Tween
+
 
 func _ready():
-	background.color = color
+	tween.start()
 
 
-func _on_Timer_timeout():
-	get_tree().change_scene("res://scenes/Game.tscn")
+func _on_Tween_tween_all_completed():
+	print("completed")
+	if tween.reverse:
+		tween.reverse = false
+		tween.start()
+	else:
+		get_tree().change_scene_to(next_screen)
+

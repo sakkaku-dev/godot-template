@@ -24,15 +24,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/CSSSimplifier.gd"
 }, {
-"base": "Control",
-"class": "FocusContainer",
+"base": "Node",
+"class": "Effect",
 "language": "GDScript",
-"path": "res://addons/components/focus/FocusContainer.gd"
+"path": "res://shared/effect/Effect.gd"
 }, {
-"base": "Control",
-"class": "Focusable",
+"base": "Effect",
+"class": "FadeEffect",
 "language": "GDScript",
-"path": "res://addons/components/focus/Focusable.gd"
+"path": "res://shared/effect/FadeEffect.gd"
 }, {
 "base": "Reference",
 "class": "GutHookScript",
@@ -64,25 +64,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://shared/input/InputReader.gd"
 }, {
-"base": "FocusContainer",
-"class": "Menu",
+"base": "Reference",
+"class": "Logger",
 "language": "GDScript",
-"path": "res://addons/components/menu/Menu.gd"
-}, {
-"base": "Menu",
-"class": "MenuContainer",
-"language": "GDScript",
-"path": "res://addons/components/menu/MenuContainer.gd"
-}, {
-"base": "Node",
-"class": "MouseFollowState",
-"language": "GDScript",
-"path": "res://shared/state/MouseFollowState.gd"
-}, {
-"base": "State",
-"class": "MoveForwardState",
-"language": "GDScript",
-"path": "res://shared/state/MoveForwardState.gd"
+"path": "res://shared/Logger.gd"
 }, {
 "base": "Reference",
 "class": "OptParse",
@@ -94,50 +79,35 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/Options.gd"
 }, {
-"base": "Focusable",
-"class": "PlayerFocus",
-"language": "GDScript",
-"path": "res://addons/components/focus/PlayerFocus.gd"
-}, {
 "base": "InputReader",
 "class": "PlayerInput",
 "language": "GDScript",
 "path": "res://shared/input/PlayerInput.gd"
 }, {
-"base": "Reference",
-"class": "PlayerManager",
+"base": "Area2D",
+"class": "SoftCollision",
 "language": "GDScript",
-"path": "res://addons/components/PlayerManager.gd"
-}, {
-"base": "Node2D",
-"class": "RandomMove",
-"language": "GDScript",
-"path": "res://shared/misc/RandomMove.gd"
-}, {
-"base": "Node2D",
-"class": "Spawner",
-"language": "GDScript",
-"path": "res://shared/misc/Spawner.gd"
-}, {
-"base": "Node",
-"class": "State",
-"language": "GDScript",
-"path": "res://shared/state/State.gd"
+"path": "res://shared/combat/SoftCollision.gd"
 }, {
 "base": "Reference",
 "class": "Stylesheet",
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/Stylesheet.gd"
 }, {
-"base": "GridContainer",
-"class": "TableContainer",
-"language": "GDScript",
-"path": "res://shared/score/TableContainer.gd"
-}, {
 "base": "Reference",
 "class": "ThemeApplier",
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/ThemeApplier.gd"
+}, {
+"base": "Node",
+"class": "TouchReader",
+"language": "GDScript",
+"path": "res://shared/input/TouchReader.gd"
+}, {
+"base": "Tween",
+"class": "TweenEffect",
+"language": "GDScript",
+"path": "res://shared/effect/TweenEffect.gd"
 }, {
 "base": "Node",
 "class": "UnitTest",
@@ -148,29 +118,23 @@ _global_script_class_icons={
 "ArgumentParser": "",
 "CSSParser": "",
 "CSSSimplifier": "",
-"FocusContainer": "",
-"Focusable": "",
+"Effect": "",
+"FadeEffect": "",
 "GutHookScript": "",
 "GutTest": "",
 "Health": "",
 "HitBox": "",
 "HurtBox": "",
 "InputReader": "",
-"Menu": "",
-"MenuContainer": "",
-"MouseFollowState": "",
-"MoveForwardState": "",
+"Logger": "",
 "OptParse": "",
 "Options": "",
-"PlayerFocus": "",
 "PlayerInput": "",
-"PlayerManager": "",
-"RandomMove": "",
-"Spawner": "",
-"State": "",
+"SoftCollision": "",
 "Stylesheet": "",
-"TableContainer": "",
 "ThemeApplier": "",
+"TouchReader": "",
+"TweenEffect": "",
 "UnitTest": ""
 }
 
@@ -178,7 +142,13 @@ _global_script_class_icons={
 
 config/name="##VAR_GAME_NAME"
 run/main_scene="res://scenes/splashscreen/SplashScreen.tscn"
+boot_splash/bg_color=Color( 0.101961, 0.101961, 0.101961, 1 )
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
 
 [editor_plugins]
 
@@ -215,4 +185,5 @@ jump={
 
 [rendering]
 
+environment/default_clear_color=Color( 0.101961, 0.101961, 0.101961, 1 )
 environment/default_environment="res://default_env.tres"
