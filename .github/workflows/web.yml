@@ -8,13 +8,15 @@ jobs:
     name: Publish Web
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:3.2.3
+      image: barichello/godot-ci:3.4.4
     steps:
-      - uses: actions/checkout@v1
-      - run: scripts/prepare.sh && scripts/build.sh web
-      - run: apt-get update && apt-get install -y rsync # is needed in order to deploy to GitHub Pages.
-      - uses: JamesIves/github-pages-deploy-action@releases/v3
+      - uses: actions/checkout@v2
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: build/web # The folder the action should deploy.
+          lfs: true
+      - run: ./scripts/ci/prepare-templates.sh
+      - run: ./scripts/ci/build-channel.sh web
+      - run: apt-get update && apt-get install -y rsync
+      - uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          BRANCH: gh-pages
+          FOLDER: build/web

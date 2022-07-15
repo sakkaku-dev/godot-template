@@ -126,21 +126,9 @@ _global_script_class_icons={
 "UnitTest": ""
 }
 
-[WAT]
-
-Test_Directory="res://tests"
-Results_Directory="res://tests/results/WAT"
-Minimize_Window_When_Running_Tests=false
-TestStrategy={
-"repeat": 1,
-"strategy": "RunAll"
-}
-Tags=PoolStringArray(  )
-Display=8
-
 [application]
 
-config/name="godot-template"
+config/name="##VAR_GAME_NAME"
 run/main_scene="res://scenes/splashscreen/SplashScreen.tscn"
 config/icon="res://icon.png"
 

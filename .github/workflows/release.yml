@@ -1,7 +1,6 @@
 name: Release
 
 on:
-  workflow_dispatch: {}
   push:
     tags:
       - "v*.*.*"
@@ -10,31 +9,84 @@ jobs:
   release:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:3.2.3
+      image: barichello/godot-ci:3.4.4
     strategy:
       matrix:
-        channel: [win, linux, mac, web] # Remove channel if not releasing (Available: win, linux, mac, web)
+        # Remove channel if not releasing (Available: win, linux, mac, web, android)
+        channel: [win, linux]
     env:
-      GAME: test-game # Change game name
+      GAME: ##VAR_GAME_NAME
       CHANNEL: ${{matrix.channel}}
-      PUBLISH: startsWith(github.ref, 'refs/tags/')
     steps:
-      - uses: actions/checkout@v1
-      - run: scripts/prepare.sh
-      - run: scripts/build.sh $CHANNEL $GAME
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      - name: Setup Templates
+        run: ./scripts/ci/prepare-templates.sh
+
+      - name: Prepare android release
+        env:
+          ANDROID_KEYSTORE: ${{secrets.ANDROID_RELEASE_KEYSTORE}}
+          ANDROID_KEYSTORE_USER: ${{secrets.ANDROID_RELEASE_KEYSTORE_USER}}
+          ANDROID_KEYSTORE_PW: ${{secrets.ANDROID_RELEASE_KEYSTORE_PW}}
+        if: |
+          env.CHANNEL == 'android' &&
+          env.ANDROID_KEYSTORE &&
+          env.ANDROID_KEYSTORE_USER &&
+          env.ANDROID_KEYSTORE_PW
+        run: |
+          echo $ANDROID_KEYSTORE | base64 --decode > ./release.keystore
+          sed 's@keystore/release=".*"@keystore/release="'./release.keystore'"@g' -i export_presets.cfg
+          sed 's@keystore/release_user=".*"@keystore/release_user="'$ANDROID_KEYSTORE_USER'"@g' -i export_presets.cfg
+          sed 's@keystore/release_password=".*"@keystore/release_password="'$ANDROID_KEYSTORE_PW'"@g' -i export_presets.cfg
+
+      - name: Build
+        run: ./scripts/ci/build-channel.sh $CHANNEL
+
       - name: Publish Itch
-        if: env.PUBLISH && env.BUTLER_API_KEY && env.USER && env.GAME
+        if: env.BUTLER_API_KEY && env.USER && env.GAME && !contains(github.ref, '-pre')
         shell: bash
         env:
           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
           USER: ${{secrets.ITCHIO_USER}}
         run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion ${GITHUB_REF/refs\/tags\//}
-      - run: scripts/package.sh $CHANNEL
-        if: env.PUBLISH
-      - uses: softprops/action-gh-release@v1
-        if: env.PUBLISH
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Package builds
+        if: |
+          env.CHANNEL != 'android' &&
+          env.CHANNEL != 'mac'
+        run: |
+          cd build
+          mv $CHANNEL $GAME && zip -r $GAME-$CHANNEL.zip $GAME
+
+      # Upload exported build
+      - name: Upload artifacts
+        if: env.CHANNEL != 'android'
+        uses: actions/upload-artifact@v2
         with:
+          name: release
+          path: build/**/*.zip
+
+      - name: Upload android
+        if: env.CHANNEL == 'android'
+        uses: actions/upload-artifact@v2
+        with:
+          name: release
+          path: build/**/*.aab
+
+  github-release:
+    runs-on: ubuntu-latest
+    needs: build-release
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: release
+      - run: ls
+      - uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
           files: |
-            build/$CHANNEL/$CHANNEL.zip
+            **/*.zip
+            **/*.aab
