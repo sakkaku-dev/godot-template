@@ -35,11 +35,3 @@ func test_action_strength():
 	assert_eq(input.get_action_strength("move_right"), 1.0)
 
 	assert_eq(input.get_action_strength("ui_up"), 0.0)
-
-
-func test_just_pressed():
-	input.handle_input(press_key("move_left"))
-	assert_true(input.is_just_pressed("move_left"))
-
-	simulate(input, 1, 1)
-	assert_false(input.is_just_pressed("move_left"))
