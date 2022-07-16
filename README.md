@@ -1,8 +1,12 @@
-### Godot Template
+## Godot Template
 
-#### Things to change
+Custom template for godot games
 
-- Project Name inside Godot
-- Update game name in release.yml
-- Update export types in release.yml
-- Enable Github Pages (if needed)
+### Setup
+
+After creating the repository with this template do the following:
+
+- Run `scripts/init-template.sh <GAME_NAME>`
+- Edit `.github/workflows/release.yml` on which platforms you want to release
+- If releasing on android
+  - Run `scripts/android-keystore.sh <GAME_NAME>`
