@@ -1,16 +1,16 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/splashscreen/portrait.png" type="Texture" id=1]
-[ext_resource path="res://scenes/Game.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/splashscreen/SplashScreen.gd" type="Script" id=3]
-[ext_resource path="res://shared/effect/TweenEffect.gd" type="Script" id=4]
-[ext_resource path="res://shared/effect/FadeEffect.gd" type="Script" id=5]
+[ext_resource path="res://shared/effect/FadeEffect.gd" type="Script" id=1]
+[ext_resource path="res://shared/effect/TweenEffect.gd" type="Script" id=2]
+[ext_resource path="res://src/splashscreen/SplashScreen.gd" type="Script" id=3]
+[ext_resource path="res://src/Game.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/splashscreen/portrait.png" type="Texture" id=5]
 
 [node name="SplashScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
-next_screen = ExtResource( 2 )
+next_screen = ExtResource( 4 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_left = 0.5
@@ -25,15 +25,15 @@ margin_right = 540.0
 margin_bottom = 810.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 1 )
+texture = ExtResource( 5 )
 
 [node name="Tween" type="Tween" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 2 )
 initialize = true
 reverse = true
 
 [node name="FadeEffect" type="Node" parent="Tween"]
-script = ExtResource( 5 )
+script = ExtResource( 1 )
 delay = 0.5
 duration = 1.0
 node_paths = [ NodePath("../../CenterContainer/TextureRect") ]

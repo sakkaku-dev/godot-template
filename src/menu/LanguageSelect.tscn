@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/menu/LanguageSelect.gd" type="Script" id=2]
+
+[node name="LanguageSelect" type="OptionButton"]
+margin_right = 29.0
+margin_bottom = 20.0
+theme = ExtResource( 1 )
+text = "LANG_EN"
+items = [ "LANG_EN", null, false, 0, null, "LANG_DE", null, false, 1, null, "LANG_JA", null, false, 2, null ]
+selected = 0
+script = ExtResource( 2 )

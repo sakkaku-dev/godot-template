@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://shared/input/InputReader.gd"
 }, {
+"base": "OptionButton",
+"class": "LanguageSelect",
+"language": "GDScript",
+"path": "res://src/menu/LanguageSelect.gd"
+}, {
 "base": "Reference",
 "class": "Logger",
 "language": "GDScript",
@@ -126,6 +131,7 @@ _global_script_class_icons={
 "HitBox": "",
 "HurtBox": "",
 "InputReader": "",
+"LanguageSelect": "",
 "Logger": "",
 "OptParse": "",
 "Options": "",
@@ -141,7 +147,7 @@ _global_script_class_icons={
 [application]
 
 config/name="##VAR_GAME_NAME"
-run/main_scene="res://scenes/splashscreen/SplashScreen.tscn"
+run/main_scene="res://src/splashscreen/SplashScreen.tscn"
 boot_splash/bg_color=Color( 0.101961, 0.101961, 0.101961, 1 )
 config/icon="res://icon.png"
 
@@ -186,6 +192,11 @@ jump={
 2d_physics/layer_3="enemy"
 2d_physics/layer_4="player_hurtbox"
 2d_physics/layer_5="enemy_hurtbox"
+
+[locale]
+
+translations=PoolStringArray( "res://i18n/de.po", "res://i18n/en.po", "res://i18n/ja.po" )
+locale_filter=[ 0, [  ] ]
 
 [rendering]
 
