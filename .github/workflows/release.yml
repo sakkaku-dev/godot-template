@@ -17,6 +17,7 @@ jobs:
     env:
       GAME: ##VAR_GAME_NAME
       CHANNEL: ${{matrix.channel}}
+      GODOT_VERSION: 3.4.4
     steps:
       - uses: actions/checkout@v2
         with:
