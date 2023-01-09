@@ -19,7 +19,7 @@ jobs:
       CHANNEL: ${{matrix.channel}}
       GODOT_VERSION: 3.4.4
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           lfs: true
 
@@ -42,6 +42,9 @@ jobs:
           sed 's@keystore/release_user=".*"@keystore/release_user="'$ANDROID_KEYSTORE_USER'"@g' -i export_presets.cfg
           sed 's@keystore/release_password=".*"@keystore/release_password="'$ANDROID_KEYSTORE_PW'"@g' -i export_presets.cfg
 
+      - name: Prepare Build
+        run: ./scripts/ci/prepare-build.sh $GITHUB_REF_NAME
+
       - name: Build
         run: ./scripts/ci/build-channel.sh $CHANNEL
 
@@ -51,7 +54,7 @@ jobs:
         env:
           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
           USER: ${{secrets.ITCHIO_USER}}
-        run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion ${GITHUB_REF/refs\/tags\//}
+        run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion $GITHUB_REF_NAME
 
       - name: Package builds
         if: |
@@ -64,14 +67,14 @@ jobs:
       # Upload exported build
       - name: Upload artifacts
         if: env.CHANNEL != 'android'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: release
           path: build/**/*.zip
 
       - name: Upload android
         if: env.CHANNEL == 'android'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: release
           path: build/**/*.aab
@@ -80,13 +83,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: release
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: release
-      - run: ls
-      - uses: marvinpinto/action-automatic-releases@v1.2.1
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
           files: |
             **/*.zip

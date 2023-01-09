@@ -11,7 +11,7 @@ jobs:
     container:
       image: barichello/godot-ci:3.4.4
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           lfs: true
       - run: sh scripts/ci/test.sh

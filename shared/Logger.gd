@@ -1,42 +1,34 @@
 class_name Logger
 
-enum Level {
-	INFO,
-	WARN,
-	ERROR,
-	DEBUG,
-	TRACE,
-}
 
 var name = ""
-var levels = [Level.INFO, Level.DEBUG]
 
 func _init(n: String):
 	name = n
 
 
 func info(msg: String):
-	_log_for_level(Level.INFO, msg)
+	_log_for_level(Env.Level.INFO, msg)
 
 
 func warn(msg: String):
-	_log_for_level(Level.WARN, msg)
+	_log_for_level(Env.Level.WARN, msg)
 
 
 func error(msg: String):
-	_log_for_level(Level.ERROR, msg)
+	_log_for_level(Env.Level.ERROR, msg)
 
 
 func debug(msg: String):
-	_log_for_level(Level.DEBUG, msg)
+	_log_for_level(Env.Level.DEBUG, msg)
 
 
 func trace(msg: String):
-	_log_for_level(Level.TRACE, msg)
+	_log_for_level(Env.Level.TRACE, msg)
 
 
 func _log_for_level(level: int, msg: String):
-	if level in levels:
+	if level <= Env.log_level:
 		print("[%s - %s]: %s" % [_now(), name, msg])
 
 
