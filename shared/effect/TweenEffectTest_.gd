@@ -1,4 +1,4 @@
-extends UnitTest
+extends GutTest
 
 var tween: TweenEffect
 var node: Node2D
