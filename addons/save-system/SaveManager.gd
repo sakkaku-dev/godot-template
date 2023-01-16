@@ -6,8 +6,6 @@ const SAVE_FILE = SAVES_FOLDER + "/save_%s.dat"
 var logger = Logger.new("SaveManager")
 
 func _ready():
-	pause_mode = Node.PAUSE_MODE_PROCESS
-	
 	var dir = Directory.new()
 	if not dir.dir_exists(SAVES_FOLDER):
 		dir.make_dir(SAVES_FOLDER)

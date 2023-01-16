@@ -1,4 +1,4 @@
-class_name SaveProperties extends Node
+class_name CacheProperties extends Node
 
 export var properties: PoolStringArray
 export var node_path: NodePath

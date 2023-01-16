@@ -16,4 +16,5 @@ After creating the repository with this template do the following:
 - [Continuous Integration](./.github/README.md)
 - [Internationalization](./addons/i18n/README.md)
 - [Input System](./addons/input-system/README.md)
+- [Save System](./addons/save-system/README.md)
 - [Debug](./addons/debug/README.md)

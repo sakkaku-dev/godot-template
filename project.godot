@@ -34,10 +34,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/CSSSimplifier.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "CacheManager",
 "language": "GDScript",
-"path": "res://shared/save/CacheManager.gd"
+"path": "res://addons/save-system/CacheManager.gd"
+}, {
+"base": "Node",
+"class": "CacheProperties",
+"language": "GDScript",
+"path": "res://addons/save-system/CacheProperties.gd"
 }, {
 "base": "Node",
 "class": "Effect",
@@ -114,11 +119,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/input-system/PlayerInput.gd"
 }, {
-"base": "Node",
-"class": "SaveProperties",
-"language": "GDScript",
-"path": "res://shared/save/SaveProperties.gd"
-}, {
 "base": "Area2D",
 "class": "SoftCollision",
 "language": "GDScript",
@@ -156,6 +156,7 @@ _global_script_class_icons={
 "CSSParser": "",
 "CSSSimplifier": "",
 "CacheManager": "",
+"CacheProperties": "",
 "Effect": "",
 "FadeEffect": "",
 "GutHookScript": "",
@@ -171,7 +172,6 @@ _global_script_class_icons={
 "OptParse": "",
 "Options": "",
 "PlayerInput": "",
-"SaveProperties": "",
 "SoftCollision": "",
 "Stylesheet": "",
 "ThemeApplier": "",
