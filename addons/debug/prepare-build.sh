@@ -17,5 +17,5 @@ fi
 cat << EOF > addons/debug/Build.gd
 class_name Build
 
-const version = '$CLIENT_VERSION'
+const VERSION = '$CLIENT_VERSION'
 EOF

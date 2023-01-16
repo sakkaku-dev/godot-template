@@ -1,4 +1,5 @@
-class_name Effect extends Node
+class_name Effect
+extends Node
 
 export var delay = 0.0
 export var duration = 0.5

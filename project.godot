@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/CSSSimplifier.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "CacheManager",
 "language": "GDScript",
 "path": "res://addons/save-system/CacheManager.gd"

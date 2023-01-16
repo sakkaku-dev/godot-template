@@ -3,6 +3,7 @@ extends Area2D
 var last_interacted: Interactable
 var closest: Interactable
 
+
 func _ready():
 	connect("area_exited", self, "_on_exit")
 
@@ -42,14 +43,14 @@ func _get_closest_interactable():
 	if monitoring:
 		for area in get_overlapping_areas():
 			if closest_item == null:
-					closest_item = area
+				closest_item = area
 			else:
 				var item_dir = (area.global_position - global_position).normalized()
 				var hand_dir = Vector2.RIGHT * scale.x
 				var dot_scale = item_dir.dot(hand_dir)
-				
+
 				if dot_scale > closest_item_dot_scale:
 					closest_item = area
 					closest_item_dot_scale = dot_scale
-	
+
 	return closest_item

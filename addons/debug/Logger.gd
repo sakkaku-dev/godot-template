@@ -1,7 +1,7 @@
 class_name Logger
 
-
 var name = ""
+
 
 func _init(n: String):
 	name = n

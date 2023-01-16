@@ -9,7 +9,7 @@ var _original_font: Font
 func _ready():
 	_original_font = get_font("font")
 	var font := _original_font.duplicate()
-	
+
 	if spacing != 0.0:
 		font.set("extra_spacing_top", spacing)
 		font.set("extra_spacing_bottom", spacing)

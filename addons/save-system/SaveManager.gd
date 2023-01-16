@@ -5,11 +5,12 @@ const SAVE_FILE = SAVES_FOLDER + "/save_%s.dat"
 
 var logger = Logger.new("SaveManager")
 
+
 func _ready():
 	var dir = Directory.new()
 	if not dir.dir_exists(SAVES_FOLDER):
 		dir.make_dir(SAVES_FOLDER)
-	
+
 
 func save_to_slot(slot: int, data):
 	var file = File.new()
@@ -21,7 +22,8 @@ func save_to_slot(slot: int, data):
 		file.store_var(data)
 		logger.debug("Save %s" % str(data))
 	file.close()
-	
+
+
 func load_from_slot(slot: int):
 	var file = File.new()
 	var file_name = SAVE_FILE % slot
@@ -34,7 +36,7 @@ func load_from_slot(slot: int):
 		if data:
 			logger.debug("Load %s" % str(data))
 	file.close()
-	
+
 	return data
 
 
@@ -42,7 +44,7 @@ func is_slot_saved(slot: int):
 	var file = File.new()
 	var file_name = SAVE_FILE % slot
 	var error = file.open(file_name, File.READ)
-	
+
 	var found = false
 	if error:
 		logger.error("Failed to load data from %s: %s" % [file_name, error])
@@ -51,4 +53,3 @@ func is_slot_saved(slot: int):
 	file.close()
 
 	return found
-

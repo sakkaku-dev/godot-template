@@ -39,7 +39,7 @@ func test_action_strength():
 
 func test_just_pressed_and_released():
 	watch_signals(input)
-	
+
 	var ev = press_key("move_left")
 	input.handle_input(ev)
 	assert_signal_emitted_with_parameters(input, "just_pressed", [ev])
@@ -61,6 +61,7 @@ func test_empty_inputs_on_disable():
 
 	input.disable()
 	assert_eq(input.get_action_strength("move_left"), 0.0)
+
 
 func test_disabled_exceptions():
 	input.disable(["move_left"])

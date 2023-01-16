@@ -1,4 +1,5 @@
-class_name TouchReader extends Node
+class_name TouchReader
+extends Node
 
 signal swipe(left)
 
@@ -18,7 +19,7 @@ func _input(event: InputEvent):
 
 
 func _calculate_swipe(swipe_end):
-	if swipe_start == null: 
+	if swipe_start == null:
 		return
 	var swipe = swipe_end - swipe_start
 	if abs(swipe.x) > swipe_threshold:

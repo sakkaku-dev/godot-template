@@ -1,10 +1,13 @@
-class_name SoftCollision extends Area2D
+class_name SoftCollision
+extends Area2D
 
 var push_factor := 0.0
 
-func _process(delta):
+
+func _process(_delta):
 	for area in get_overlapping_areas():
 		pass
+
 
 func get_push_vector():
 	var areas = get_overlapping_areas()
