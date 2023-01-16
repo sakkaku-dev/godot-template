@@ -8,7 +8,7 @@ jobs:
     name: Publish Web
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:3.4.4
+      image: barichello/godot-ci:3.5.1
     steps:
       - uses: actions/checkout@v3
         with:

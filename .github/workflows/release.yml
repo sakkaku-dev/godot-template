@@ -49,7 +49,7 @@ jobs:
         run: ./scripts/ci/build-channel.sh $CHANNEL
 
       - name: Publish Itch
-        if: env.BUTLER_API_KEY && env.USER && env.GAME && !contains(github.ref, '-pre')
+        if: env.BUTLER_API_KEY && env.USER && env.GAME && !contains(github.ref, '-rc')
         shell: bash
         env:
           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
