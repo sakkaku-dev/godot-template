@@ -82,7 +82,7 @@ _global_script_classes=[ {
 "base": "OptionButton",
 "class": "LanguageSelect",
 "language": "GDScript",
-"path": "res://src/menu/LanguageSelect.gd"
+"path": "res://i18n/menu/LanguageSelect.gd"
 }, {
 "base": "Reference",
 "class": "Logger",
@@ -258,7 +258,7 @@ dev={
 
 [locale]
 
-translations=PoolStringArray( "res://i18n/de.po", "res://i18n/en.po", "res://i18n/ja.po" )
+translations=PoolStringArray( "res://i18n/de.po", "res://i18n/en.po" )
 locale_filter=[ 0, [  ] ]
 
 [rendering]

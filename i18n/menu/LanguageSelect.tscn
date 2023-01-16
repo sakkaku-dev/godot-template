@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://i18n/menu/LanguageSelect.gd" type="Script" id=2]
+
+[node name="LanguageSelect" type="OptionButton"]
+margin_right = 29.0
+margin_bottom = 20.0
+text = "LANG_EN"
+items = [ "LANG_EN", null, false, 0, null, "LANG_DE", null, false, 1, null]
+selected = 0
+script = ExtResource( 2 )

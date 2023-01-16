@@ -10,3 +10,7 @@ After creating the repository with this template do the following:
 - Edit `.github/workflows/release.yml` on which platforms you want to release
 - If releasing on android
   - Run `scripts/android-keystore.sh <GAME_NAME>`
+
+### Features
+
+- [Internationalization](./i18n/README.md) (`i18n`)
