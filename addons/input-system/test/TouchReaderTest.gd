@@ -1,4 +1,4 @@
-extends UnitTest
+extends BaseInputTest
 
 var input: TouchReader
 

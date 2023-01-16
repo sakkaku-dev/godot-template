@@ -1,5 +1,5 @@
 {
-  "dirs": ["res://tests/"],
+  "dirs": ["res://"],
   "double_strategy": "partial",
   "ignore_pause": false,
   "include_subdirs": true,

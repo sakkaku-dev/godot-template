@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://i18n/menu/LanguageSelect.gd" type="Script" id=2]
+[ext_resource path="res://addons/i18n/menu/LanguageSelect.gd" type="Script" id=2]
 
 [node name="LanguageSelect" type="OptionButton"]
 margin_right = 29.0

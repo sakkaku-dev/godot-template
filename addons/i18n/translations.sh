@@ -1,11 +1,11 @@
 #!/bin/sh
 
-mkdir -p i18n
+DIR="addons/i18n"
 
-pybabel extract -F i18n/babelrc -k text -k LineEdit/placeholder_text -k tr -k items --no-location -o i18n/messages.pot \
-    src i18n/menu
+pybabel extract -F "$DIR/babelrc" -k text -k LineEdit/placeholder_text -k tr -k items --no-location -o "$DIR/messages.pot" \
+    src "$DIR/menu"
 
-cd i18n
+cd $DIR
 
 LANGS=(en de)
 

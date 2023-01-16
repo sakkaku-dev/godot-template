@@ -1,4 +1,4 @@
-extends UnitTest
+extends BaseInputTest
 
 var input: InputReader
 
@@ -35,6 +35,18 @@ func test_action_strength():
 	assert_eq(input.get_action_strength("move_right"), 1.0)
 
 	assert_eq(input.get_action_strength("ui_up"), 0.0)
+
+
+func test_just_pressed_and_released():
+	watch_signals(input)
+	
+	var ev = press_key("move_left")
+	input.handle_input(ev)
+	assert_signal_emitted_with_parameters(input, "just_pressed", [ev])
+
+	ev = release_key("move_left")
+	input.handle_input(ev)
+	assert_signal_emitted_with_parameters(input, "just_released", [ev])
 
 
 func test_disable_input():

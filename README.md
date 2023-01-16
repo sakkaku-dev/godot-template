@@ -1,8 +1,8 @@
-## Godot Template
+# Godot Template
 
 Custom template for godot games
 
-### Setup
+## Setup
 
 After creating the repository with this template do the following:
 
@@ -11,6 +11,7 @@ After creating the repository with this template do the following:
 - If releasing on android
   - Run `scripts/android-keystore.sh <GAME_NAME>`
 
-### Features
+## Features
 
-- [Internationalization](./i18n/README.md) (`i18n`)
+- [Internationalization](./addons/i18n/README.md)
+- [Input System](./addons/input-system/README.md)

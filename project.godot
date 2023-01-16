@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/ArgumentParser.gd"
 }, {
+"base": "Node",
+"class": "BaseInputTest",
+"language": "GDScript",
+"path": "res://addons/input-system/test/BaseInputTest.gd"
+}, {
 "base": "Reference",
 "class": "Build",
 "language": "GDScript",
@@ -72,7 +77,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "InputReader",
 "language": "GDScript",
-"path": "res://shared/input/InputReader.gd"
+"path": "res://addons/input-system/InputReader.gd"
 }, {
 "base": "Area2D",
 "class": "Interactable",
@@ -82,7 +87,7 @@ _global_script_classes=[ {
 "base": "OptionButton",
 "class": "LanguageSelect",
 "language": "GDScript",
-"path": "res://i18n/menu/LanguageSelect.gd"
+"path": "res://addons/i18n/menu/LanguageSelect.gd"
 }, {
 "base": "Reference",
 "class": "Logger",
@@ -107,7 +112,7 @@ _global_script_classes=[ {
 "base": "InputReader",
 "class": "PlayerInput",
 "language": "GDScript",
-"path": "res://shared/input/PlayerInput.gd"
+"path": "res://addons/input-system/PlayerInput.gd"
 }, {
 "base": "Node",
 "class": "SaveProperties",
@@ -132,7 +137,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "TouchReader",
 "language": "GDScript",
-"path": "res://shared/input/TouchReader.gd"
+"path": "res://addons/input-system/TouchReader.gd"
 }, {
 "base": "Tween",
 "class": "TweenEffect",
@@ -146,6 +151,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ArgumentParser": "",
+"BaseInputTest": "",
 "Build": "",
 "CSSParser": "",
 "CSSSimplifier": "",
@@ -258,7 +264,7 @@ dev={
 
 [locale]
 
-translations=PoolStringArray( "res://i18n/de.po", "res://i18n/en.po" )
+translations=PoolStringArray(  )
 locale_filter=[ 0, [  ] ]
 
 [rendering]
