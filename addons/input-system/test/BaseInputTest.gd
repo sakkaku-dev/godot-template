@@ -1,4 +1,4 @@
-class_name BaseInputTest extends "res://addons/gut/test.gd"
+class_name BaseInputTest extends GutTest
 
 func mouse_button_event(button: int, position: Vector2, pressed = true) -> InputEvent:
 	var mouse = InputEventMouseButton.new()
