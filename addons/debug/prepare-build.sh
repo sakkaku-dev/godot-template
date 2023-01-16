@@ -14,7 +14,7 @@ if [ -z "$CLIENT_VERSION" ]; then
 	fi
 fi
 
-cat << EOF > shared/env/Build.gd
+cat << EOF > addons/debug/Build.gd
 class_name Build
 
 const version = '$CLIENT_VERSION'

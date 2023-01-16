@@ -10,7 +10,7 @@ enum Level {
 	TRACE,
 }
 
-const DEBUG_SCENE = preload("res://shared/env/Debug.tscn")
+const DEBUG_SCENE = preload("res://addons/debug/Debug.tscn")
 
 var version = DEV_VERSION
 var log_level = Level.DEBUG

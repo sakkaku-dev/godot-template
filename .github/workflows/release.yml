@@ -43,7 +43,7 @@ jobs:
           sed 's@keystore/release_password=".*"@keystore/release_password="'$ANDROID_KEYSTORE_PW'"@g' -i export_presets.cfg
 
       - name: Prepare Build
-        run: ./scripts/ci/prepare-build.sh $GITHUB_REF_NAME
+        run: ./addons/debug/prepare-build.sh $GITHUB_REF_NAME
 
       - name: Build
         run: ./scripts/ci/build-channel.sh $CHANNEL

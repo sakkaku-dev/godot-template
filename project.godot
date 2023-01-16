@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Build",
 "language": "GDScript",
-"path": "res://shared/env/Build.gd"
+"path": "res://addons/debug/Build.gd"
 }, {
 "base": "Reference",
 "class": "CSSParser",
@@ -92,7 +92,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Logger",
 "language": "GDScript",
-"path": "res://shared/Logger.gd"
+"path": "res://addons/debug/Logger.gd"
 }, {
 "base": "Control",
 "class": "Menu",
