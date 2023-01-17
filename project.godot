@@ -14,7 +14,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/godot-css-theme/ArgumentParser.gd"
 }, {
-"base": "Node",
+"base": "HSlider",
+"class": "AudioSlider",
+"language": "GDScript",
+"path": "res://addons/menu-system/AudioSlider.gd"
+}, {
+"base": "GutTest",
 "class": "BaseInputTest",
 "language": "GDScript",
 "path": "res://addons/input-system/test/BaseInputTest.gd"
@@ -143,14 +148,10 @@ _global_script_classes=[ {
 "class": "TweenEffect",
 "language": "GDScript",
 "path": "res://shared/effect/TweenEffect.gd"
-}, {
-"base": "Node",
-"class": "UnitTest",
-"language": "GDScript",
-"path": "res://tests/UnitTest.gd"
 } ]
 _global_script_class_icons={
 "ArgumentParser": "",
+"AudioSlider": "",
 "BaseInputTest": "",
 "Build": "",
 "CSSParser": "",
@@ -176,8 +177,7 @@ _global_script_class_icons={
 "Stylesheet": "",
 "ThemeApplier": "",
 "TouchReader": "",
-"TweenEffect": "",
-"UnitTest": ""
+"TweenEffect": ""
 }
 
 [application]
@@ -189,7 +189,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Env="*res://shared/env/Env.gd"
+GameManager="*res://src/GameManager.tscn"
+Env="*res://addons/debug/Env.gd"
 
 [debug]
 

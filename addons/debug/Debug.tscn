@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://shared/env/Debug.gd" type="Script" id=1]
+[ext_resource path="res://addons/debug/Debug.gd" type="Script" id=1]
 
 [node name="Debug" type="CanvasLayer"]
 layer = 100
@@ -16,34 +16,34 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="GridContainer" parent="CenterContainer"]
-margin_left = 887.0
-margin_top = 510.0
-margin_right = 1033.0
-margin_bottom = 570.0
+margin_left = 905.0
+margin_top = 518.0
+margin_right = 1014.0
+margin_bottom = 562.0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 20
 columns = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 112.0
-margin_bottom = 25.0
+margin_right = 60.0
+margin_bottom = 14.0
 text = "Version"
 
 [node name="Version" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_left = 132.0
-margin_right = 146.0
-margin_bottom = 25.0
+margin_left = 80.0
+margin_right = 109.0
+margin_bottom = 14.0
 
 [node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_top = 35.0
-margin_right = 112.0
-margin_bottom = 60.0
+margin_top = 27.0
+margin_right = 60.0
+margin_bottom = 41.0
 text = "Log Level"
 
 [node name="OptionButton" type="OptionButton" parent="CenterContainer/VBoxContainer"]
-margin_left = 132.0
-margin_top = 35.0
-margin_right = 146.0
-margin_bottom = 60.0
+margin_left = 80.0
+margin_top = 24.0
+margin_right = 109.0
+margin_bottom = 44.0
 
 [connection signal="item_selected" from="CenterContainer/VBoxContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
