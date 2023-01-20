@@ -64,33 +64,27 @@ var _default_options := {}
 const CONFIG_ARG = "config_file"
 const HELP_ARG = ["--help", "-h"]
 
-
 func setup(banner: String, options: Dictionary) -> bool:
-	if not options.has(CONFIG_ARG):
-		return false
-
+	if not options.has(CONFIG_ARG): return false
+	
 	_banner = banner
 	_default_options = options
-
+	
 	var opts = {}
 	for opt in _default_options:
 		var value = _default_options[opt] as Array
-		if value.size() != 2:
-			return false
+		if value.size() != 2: return false
 		opts[opt] = value[0]
 	set_base_opts(opts)
 	return true
 
-
 func get_value(key):
 	return _nvl(cmd_opts[key], _nvl(config_opts[key], base_opts[key]))
-
 
 func set_base_opts(opts):
 	base_opts = opts
 	cmd_opts = _null_copy(opts)
 	config_opts = _null_copy(opts)
-
 
 # creates a copy of a hash with all values null.
 func _null_copy(h):
@@ -99,36 +93,23 @@ func _null_copy(h):
 		new_hash[key] = null
 	return new_hash
 
-
 func _nvl(a, b):
-	if a == null:
+	if(a == null):
 		return b
 	else:
 		return a
 
-
 func _string_it(h):
-	var to_return = ""
+	var to_return = ''
 	for key in h:
-		to_return += str("(", key, ":", _nvl(h[key], "NULL"), ")")
+		to_return += str('(',key, ':', _nvl(h[key], 'NULL'), ')')
 	return to_return
 
-
 func to_s():
-	return str(
-		"base:\n",
-		_string_it(base_opts),
-		"\n",
-		"config:\n",
-		_string_it(config_opts),
-		"\n",
-		"cmd:\n",
-		_string_it(cmd_opts),
-		"\n",
-		"resolved:\n",
-		_string_it(get_resolved_values())
-	)
-
+	return str("base:\n", _string_it(base_opts), "\n", \
+			   "config:\n", _string_it(config_opts), "\n", \
+			   "cmd:\n", _string_it(cmd_opts), "\n", \
+			   "resolved:\n", _string_it(get_resolved_values()))
 
 func get_resolved_values():
 	var to_return = {}
@@ -136,37 +117,32 @@ func get_resolved_values():
 		to_return[key] = get_value(key)
 	return to_return
 
-
 func to_s_verbose():
-	var to_return = ""
+	var to_return = ''
 	var resolved = get_resolved_values()
 	for key in base_opts:
 		to_return += str(key, "\n")
-		to_return += str("  default: ", _nvl(base_opts[key], "NULL"), "\n")
-		to_return += str("  config:  ", _nvl(config_opts[key], " --"), "\n")
-		to_return += str("  cmd:     ", _nvl(cmd_opts[key], " --"), "\n")
-		to_return += str("  final:   ", _nvl(resolved[key], "NULL"), "\n")
+		to_return += str('  default: ', _nvl(base_opts[key], 'NULL'), "\n")
+		to_return += str('  config:  ', _nvl(config_opts[key], ' --'), "\n")
+		to_return += str('  cmd:     ', _nvl(cmd_opts[key], ' --'), "\n")
+		to_return += str('  final:   ', _nvl(resolved[key], 'NULL'), "\n")
 
 	return to_return
-
 
 func _setup_options():
 	var opts = OptParse.new()
 	opts.set_banner(_banner)
-
+	
 	for opt in _default_options:
 		var values = _default_options[opt] as Array
-		if values.size() != 2:
-			continue
-
+		if values.size() != 2: continue
+		
 		opts.add(_build_cmd_option(opt), values[0], values[1])
-
+		
 	return opts
 
-
 func _build_cmd_option(opt: String) -> String:
-	return "--%s" % opt
-
+	return '--%s' % opt
 
 # Parses options, applying them to the _tester or setting values
 # in the options struct.
@@ -178,8 +154,8 @@ func _extract_command_line_options(from, to):
 func _load_options_from_config_file(file_path, into):
 	# SHORTCIRCUIT
 	var f = File.new()
-	if !f.file_exists(file_path):
-		if file_path != _default_options[CONFIG_ARG][0]:
+	if(!f.file_exists(file_path)):
+		if(file_path != _default_options[CONFIG_ARG][0]):
 			print('ERROR:  Config File "', file_path, '" does not exist.')
 			return -1
 		else:
@@ -191,53 +167,50 @@ func _load_options_from_config_file(file_path, into):
 
 	var results = JSON.parse(json)
 	# SHORTCIRCUIT
-	if results.error != OK:
-		print("\n\n", "!! ERROR parsing file:  ", file_path)
-		print("    at line ", results.error_line, ":")
-		print("    ", results.error_string)
+	if(results.error != OK):
+		print("\n\n",'!! ERROR parsing file:  ', file_path)
+		print('    at line ', results.error_line, ':')
+		print('    ', results.error_string)
 		return -1
 
 	# Get all the options out of the config file using the option name.  The
 	# options hash is now the default source of truth for the name of an option.
 	for key in into:
-		if results.result.has(key):
+		if(results.result.has(key)):
 			into[key] = results.result[key]
 
 	return 1
-
 
 func _print_gutconfigs(values):
 	var header = """Here is a sample of a full .gutconfig.json file.
 You do not need to specify all values in your own file.  The values supplied in
 this sample are what would be used if you ran gut w/o the -gprint_gutconfig_sample
 option (the resolved values where default < .gutconfig < command line)."""
-	print("\n", header.replace("\n", " "), "\n\n")
+	print("\n", header.replace("\n", ' '), "\n\n")
 	var resolved = values
 
 	# remove some options that don't make sense to be in config
 	resolved.erase("config_file")
 	resolved.erase("show_help")
 
-	print(
-		"Here's a config with all the properties set based off of your current command and config."
-	)
+	print("Here's a config with all the properties set based off of your current command and config.")
 	var text = JSON.print(resolved)
-	print(text.replace(",", ",\n"))
+	print(text.replace(',', ",\n"))
 
 	for key in resolved:
 		resolved[key] = null
 
 	print("\n\nAnd here's an empty config for you fill in what you want.")
 	text = JSON.print(resolved)
-	print(text.replace(",", ",\n"))
-
+	print(text.replace(',', ",\n"))
 
 func parse() -> bool:
 	var o = _setup_options()
 
 	var all_options_valid = o.parse()
 	_extract_command_line_options(o, cmd_opts)
-	var load_result = _load_options_from_config_file(get_value(CONFIG_ARG), config_opts)
+	var load_result = \
+			_load_options_from_config_file(get_value(CONFIG_ARG), config_opts)
 
 	if load_result == -1 or not all_options_valid:
 		return false

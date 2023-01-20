@@ -7,6 +7,7 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 
 	for class_group in stylesheet.get_class_groups():
 		values[class_group] = {}
+
 		for cls in stylesheet.get_classes(class_group):
 			values[class_group][cls] = {}
 
@@ -28,19 +29,23 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					)
 					new_props[mapped_prop] = props["color"]
 
+				if props.has("gap"):
+					new_props["--const-separation"] = props["gap"]
+
+				if props.has("font-family"):
+					var value = props["font-family"]
+					new_props['--fonts-font'] = value
+					if props.has("font-size"):
+						new_props['--fonts-font-size'] = props["font-size"]
+
+					
 				if props.has("background"):
 					var value = props["background"]
-					if value == "none":
-						new_props[style_type] = "Empty"
-					else:
-						new_props[style_type] = "Flat"
-						new_props[style_prefix + "bg-color"] = value
+					var is_none = value == "none"
 
-				if props.has("padding"):
-					if not new_props.has(style_type):
-						new_props[style_type] = "Empty"
-
-					_shorthand_sides(new_props, props["padding"], style_prefix + "content-margin")
+					new_props[style_type] = "Flat"
+					var color = "Color(0, 0, 0, 0)" if is_none else value
+					new_props[style_prefix + "bg-color"] = color
 
 				if props.has("border-width"):
 					new_props[style_type] = "Flat"
@@ -61,8 +66,12 @@ func simplify(stylesheet: Stylesheet) -> Stylesheet:
 					new_props[style_type] = "Flat"
 					new_props[style_prefix + "border-color"] = props["border-color"]
 
-				if props.has("gap"):
-					new_props["--const-separation"] = props["gap"]
+				if props.has("padding"):
+					if not new_props.has(style_type):
+						new_props[style_type] = "Empty"
+
+					_shorthand_sides(new_props, props["padding"], style_prefix + "content-margin")
+
 
 			values[class_group][cls][Stylesheet.DEFAULT_STATE] = new_props
 

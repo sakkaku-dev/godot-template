@@ -37,7 +37,7 @@ func _init():
 		var theme_output = output_dir + theme_name + ".tres"
 		if theme_name == "":
 			theme_output = output
-
+		
 		var err = ResourceSaver.save(theme_output, theme)
 		if err != OK:
 			print("Failed to save theme %s" % err)
