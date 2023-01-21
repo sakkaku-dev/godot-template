@@ -17,4 +17,6 @@ After creating the repository with this template do the following:
 - [Internationalization](./addons/i18n/README.md)
 - [Input System](./addons/input-system/README.md)
 - [Save System](./addons/save-system/README.md)
+- [Menu System](./addons/menu-system/README.md)
+- [Scene Manager](./addons/scene-manager/README.md)
 - [Debug](./addons/debug/README.md)
