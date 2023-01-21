@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/menu-system/AudioSlider.gd" type="Script" id=1]
 [ext_resource path="res://addons/menu-system/Options.gd" type="Script" id=2]
 [ext_resource path="res://addons/menu-system/AudioSettings.gd" type="Script" id=3]
+[ext_resource path="res://addons/menu-system/input/InputSetting.gd" type="Script" id=4]
 
 [node name="Options" type="TabContainer"]
 anchor_right = 1.0
@@ -31,3 +32,34 @@ margin_right = 1912.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 script = ExtResource( 1 )
+
+[node name="Input" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 4 )
+actions = [ "move_left", "move_right", "jump" ]
+
+[node name="InputGrid" type="GridContainer" parent="Input"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+columns = 2
+
+[node name="RemapKeyPopup" type="Panel" parent="Input"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Input/RemapKeyPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="Input/RemapKeyPopup/CenterContainer"]
+margin_left = 906.0
+margin_top = 515.0
+margin_right = 1005.0
+margin_bottom = 529.0
+text = "Press any key..."

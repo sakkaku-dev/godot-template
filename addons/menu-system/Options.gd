@@ -3,6 +3,7 @@ extends Control
 const CONFIG_FILE = "user://settings.cfg"
 
 onready var _audio := $Audio
+onready var _input := $Input
 
 var _logger = Logger.new("Options")
 var _config = ConfigFile.new()
@@ -18,6 +19,7 @@ func _load_settings():
 	
 	_logger.debug("Loading settings")
 	_audio.load_settings(_config)
+	_input.load_settings(_config)
 
 func _exit_tree():
 	_save_config()
@@ -27,4 +29,5 @@ func _save_config():
 	
 	_logger.debug("Saving settings")
 	_audio.save_settings(_config)
+	_input.save_settings(_config)
 	_config.save(CONFIG_FILE)
