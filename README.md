@@ -13,7 +13,7 @@ After creating the repository with this template do the following:
 
 ## Features
 
-- [Continuous Integration](./.github/README.md)
+- [Continuous Integration](./.github/FEATURES.md)
 - [Internationalization](./addons/i18n/README.md)
 - [Input System](./addons/input-system/README.md)
 - [Save System](./addons/save-system/README.md)
