@@ -1,10 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/menu-system/AudioSlider.gd" type="Script" id=1]
+[ext_resource path="res://addons/menu-system/Options.gd" type="Script" id=2]
+[ext_resource path="res://addons/menu-system/AudioSettings.gd" type="Script" id=3]
 
 [node name="Options" type="TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 2 )
 
 [node name="Audio" type="GridContainer" parent="."]
 anchor_right = 1.0
@@ -14,6 +17,7 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 columns = 2
+script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Audio"]
 margin_top = 1.0
@@ -23,7 +27,7 @@ text = "Master"
 
 [node name="AudioSlider" type="HSlider" parent="Audio"]
 margin_left = 48.0
-margin_right = 632.0
+margin_right = 1912.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 script = ExtResource( 1 )
