@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/menu-system/AudioSlider.gd" type="Script" id=1]
-[ext_resource path="res://addons/menu-system/Options.gd" type="Script" id=2]
-[ext_resource path="res://addons/menu-system/AudioSettings.gd" type="Script" id=3]
-[ext_resource path="res://addons/menu-system/input/InputSetting.gd" type="Script" id=4]
+[ext_resource path="res://addons/godot-css-theme/Options.gd" type="Script" id=2]
+[ext_resource path="res://src/menu/AudioSettings.gd" type="Script" id=3]
+[ext_resource path="res://src/menu/InputSetting.gd" type="Script" id=4]
 
 [node name="Options" type="TabContainer"]
 anchor_right = 1.0
