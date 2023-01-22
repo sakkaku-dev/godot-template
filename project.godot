@@ -129,10 +129,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/input-system/PlayerInput.gd"
 }, {
-"base": "Button",
+"base": "Reference",
 "class": "RemapButton",
 "language": "GDScript",
-"path": "res://addons/menu-system/input/RemapButton.gd"
+"path": "res://addons/menu-system/RemapButton.gd"
 }, {
 "base": "Area2D",
 "class": "SoftCollision",
