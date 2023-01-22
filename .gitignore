@@ -7,3 +7,4 @@ tests/results
 build/
 *.css*
 _sprites/
+.godot/

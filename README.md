@@ -1,6 +1,8 @@
 # Godot Template
 
-Custom template for godot games
+Custom template for godot games for godot 4
+
+use branch `godot-3.x` for godot 3, but it might not be up-to-date with the latest features
 
 ## Setup
 

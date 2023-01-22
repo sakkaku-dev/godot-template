@@ -1,12 +1,12 @@
 extends Menu
 
-export var start_scene: PackedScene
+@export var start_scene: PackedScene
 
-onready var root := get_parent()
-onready var pause := $Pause
-onready var options := $Options
+@onready var root := get_parent()
+@onready var pause := $Pause
+@onready var options := $Options
 
-onready var back_button := $Pause/CenterContainer/VBoxContainer/Back
+@onready var back_button := $Pause/CenterContainer/VBoxContainer/Back
 
 func _ready():
 	clear_menu()
@@ -19,13 +19,13 @@ func _handle_event(event: InputEvent):
 			change_menu(pause)
 			get_tree().set_input_as_handled()
 		elif is_in_sub_menu():
-			._handle_event(event)
+			super._handle_event(event)
 		else:
 			_on_Resume_pressed()
 
 
 func update_menu():
-	.update_menu()
+	super.update_menu()
 	
 	root.visible = menu_stack.size() > 0
 	get_tree().paused = root.visible

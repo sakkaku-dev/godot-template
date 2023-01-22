@@ -4,9 +4,9 @@ signal scene_changed()
 
 const DEFAULT_SPEED = 2
 
-export var disable_inputs = true
+@export var disable_inputs = true
 
-onready var anim := $AnimationPlayer
+@onready var anim := $AnimationPlayer
 
 var transitioning = false
 
@@ -23,12 +23,11 @@ func change_scene(scene):
 	var path = scene
 	if scene is PackedScene:
 		path = scene.resource_path
-	print(path)
 	transitioning = true
 	
-	yield(_play_transition(DEFAULT_SPEED, false), "completed")
+	await _play_transition(DEFAULT_SPEED, false)
 	get_tree().change_scene(path)
-	yield(_play_transition(DEFAULT_SPEED, true), "completed")
+	await _play_transition(DEFAULT_SPEED, true)
 
 	transitioning = false
 	emit_signal("scene_changed")
@@ -40,4 +39,4 @@ func _play_transition(speed: float, backwards: bool):
 		anim.play_backwards("Transition")
 	else:
 		anim.play("Transition")
-	yield(anim, "animation_finished")
+	await anim.animation_finished

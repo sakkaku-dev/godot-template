@@ -9,12 +9,12 @@ var input_types = InputMap.get_actions()
 
 var inputs = []
 var action_strength = {}
-var disabled = false setget _set_disabled
+var _disabled = false : set = _set_disabled
 var disabled_exception = []
 
 
 func _set_disabled(d):
-	disabled = d
+	_disabled = d
 	emit_signal("disabled", d)
 
 
@@ -22,7 +22,7 @@ func handle_input(event: InputEvent):
 	var actions = _get_actions_for_event(event)
 
 	for action in actions:
-		if disabled and not action in disabled_exception:
+		if _disabled and not action in disabled_exception:
 			continue
 
 		action_strength[action] = event.get_action_strength(action)
@@ -68,12 +68,12 @@ func get_action_strength(key: String) -> float:
 
 
 func disable(exceptions: Array = []) -> void:
-	self.disabled = true
+	self._disabled = true
 	inputs.clear()
 	action_strength.clear()
 	disabled_exception = exceptions
 
 
 func enable() -> void:
-	self.disabled = false
+	self._disabled = false
 	disabled_exception = []

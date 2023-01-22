@@ -107,9 +107,9 @@ func _string_it(h):
 
 func to_s():
 	return str("base:\n", _string_it(base_opts), "\n", \
-			   "config:\n", _string_it(config_opts), "\n", \
-			   "cmd:\n", _string_it(cmd_opts), "\n", \
-			   "resolved:\n", _string_it(get_resolved_values()))
+				"config:\n", _string_it(config_opts), "\n", \
+				"cmd:\n", _string_it(cmd_opts), "\n", \
+				"resolved:\n", _string_it(get_resolved_values()))
 
 func get_resolved_values():
 	var to_return = {}
@@ -153,19 +153,18 @@ func _extract_command_line_options(from, to):
 
 func _load_options_from_config_file(file_path, into):
 	# SHORTCIRCUIT
-	var f = File.new()
-	if(!f.file_exists(file_path)):
+	if(not FileAccess.file_exists(file_path)):
 		if(file_path != _default_options[CONFIG_ARG][0]):
 			print('ERROR:  Config File "', file_path, '" does not exist.')
 			return -1
 		else:
 			return 1
 
-	f.open(file_path, f.READ)
-	var json = f.get_as_text()
-	f.close()
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var json = file.get_as_text()
+	file.close()
 
-	var results = JSON.parse(json)
+	var results = JSON.parse_string(json)
 	# SHORTCIRCUIT
 	if(results.error != OK):
 		print("\n\n",'!! ERROR parsing file:  ', file_path)
@@ -193,16 +192,16 @@ option (the resolved values where default < .gutconfig < command line)."""
 	resolved.erase("config_file")
 	resolved.erase("show_help")
 
-	print("Here's a config with all the properties set based off of your current command and config.")
-	var text = JSON.print(resolved)
-	print(text.replace(',', ",\n"))
-
-	for key in resolved:
-		resolved[key] = null
-
-	print("\n\nAnd here's an empty config for you fill in what you want.")
-	text = JSON.print(resolved)
-	print(text.replace(',', ",\n"))
+#	print("Here's a config with all the properties set based off of your current command and config.")
+#	var text = JSON.pri(resolved)
+#	print(text.replace(',', ",\n"))
+#
+#	for key in resolved:
+#		resolved[key] = null
+#
+#	print("\n\nAnd here's an empty config for you fill in what you want.")
+#	text = JSON.print(resolved)
+#	print(text.replace(',', ",\n"))
 
 func parse() -> bool:
 	var o = _setup_options()

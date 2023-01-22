@@ -116,20 +116,19 @@ func _load_font_resource(url, size):
 
 
 func _create_font_with_size(font_url, size):
-	var font = DynamicFont.new()
-	font.font_data = load(font_url)
-	var output = font_url.split(".")[0]
-	var suffix = ""
-
-	# Changing font size does not get saved, but in Godot 4.0 this should be easier to change
-	if size != null:
-		suffix = "_" + str(size)
-		font.set("font_size", size)
-		if _debug:
-			print("Set font size: %s" % size)
-
-	ResourceSaver.save(output + suffix + ".tres", font)
-	return font
+	return load(font_url)
+#	var output = font_url.split(".")[0]
+#	var suffix = ""
+#
+#	# Changing font size does not get saved, but in Godot 4.0 this should be easier to change
+#	if size != null:
+#		suffix = "_" + str(size)
+#		font.set("font_size", size)
+#		if _debug:
+#			print("Set font size: %s" % size)
+#
+#	ResourceSaver.save(output + suffix + ".tres", font)
+#	return font
 
 
 func _is_equal_stylebox(style1: StyleBox, style2: StyleBox) -> bool:
@@ -161,9 +160,9 @@ func _create_value(stylesheet: Stylesheet, value: String):
 		return Color(value)
 	
 	if value == TRANSPARENT:
-		return Color.transparent
+		return Color.TRANSPARENT
 
-	return str2var(value)
+	return str_to_var(value)
 
 
 func _create_style(type: String) -> StyleBox:

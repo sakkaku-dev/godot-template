@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-export var start_scene: PackedScene
+@export var start_scene: PackedScene
 
-onready var back_button := $Control/Pause/CenterContainer/VBoxContainer/Back
+@onready var back_button := $Control/Pause/CenterContainer/VBoxContainer/Back
 
 func _ready():
 	back_button.visible = !!start_scene

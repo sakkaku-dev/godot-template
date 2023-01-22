@@ -12,7 +12,7 @@ func _update():
 	text = InputType.to_text(InputType.to_type(ev))
 
 func get_input() -> InputEvent:
-	var inputs = InputMap.get_action_list(action)
+	var inputs = InputMap.action_get_events(action)
 	for i in inputs:
 		if input.is_player_event(i):
 			return i

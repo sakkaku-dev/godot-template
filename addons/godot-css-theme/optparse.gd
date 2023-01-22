@@ -37,6 +37,7 @@
 # See the readme for a list of options and examples.  You can also use the -gh
 # option to get more information about how to use the command line interface.
 # ##############################################################################
+class_name OptParse
 
 #-------------------------------------------------------------------------------
 # Parses the command line arguments supplied into an array that can then be
@@ -172,7 +173,6 @@ class Option:
 # supplied.  Uses Option class and CmdLineParser to extract information from
 # the command line and make it easily accessible.
 #-------------------------------------------------------------------------------
-class_name OptParse
 
 var options = []
 var _opts = []

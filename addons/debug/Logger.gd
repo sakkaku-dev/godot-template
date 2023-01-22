@@ -33,7 +33,7 @@ func _log_for_level(level: int, msg: String):
 
 
 func _now() -> String:
-	var dt = OS.get_datetime()
+	var dt = Time.get_datetime_dict_from_system()
 	var year = dt["year"]
 	var month = _leading_zero(dt["month"])
 	var day = _leading_zero(dt["day"])

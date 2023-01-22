@@ -5,7 +5,7 @@ var closest: Interactable
 
 
 func _ready():
-	connect("area_exited", self, "_on_exit")
+	connect("area_exited", _on_exit)
 
 
 func _on_exit(area):

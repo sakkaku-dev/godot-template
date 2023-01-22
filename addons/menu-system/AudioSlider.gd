@@ -1,17 +1,15 @@
 class_name AudioSlider
 extends HSlider
 
-export var bus_name := "Master"
+@export var bus_name := "Master"
 
 var master_id
 var vol_range = 60
 var vol_offset = 5
 
 func _ready():
-	yield(owner, "ready")
-	
 	master_id = AudioServer.get_bus_index(bus_name)
-	connect("value_changed", self, "_volume_changed")
+	connect("value_changed", self._volume_changed)
 	value = get_volume_percentage()
 
 func _volume_changed(v: float):

@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-onready var options := $CenterContainer/VBoxContainer/OptionButton
-onready var version := $CenterContainer/VBoxContainer/Version
+@onready var options := $CenterContainer/VBoxContainer/OptionButton
+@onready var version := $CenterContainer/VBoxContainer/Version
 
 
 func _ready():

@@ -3,14 +3,14 @@ extends Node
 
 signal swipe(left)
 
-export var swipe_threshold = 100
+@export var swipe_threshold = 100
 
 var swipe_start
 
 
 func _input(event: InputEvent):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT:
+		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed():
 				swipe_start = event.position
 			else:

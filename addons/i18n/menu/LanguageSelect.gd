@@ -5,7 +5,7 @@ const LANG_PREFIX = "LANG_"
 
 
 func _ready():
-	connect("item_selected", self, "_on_item_selected")
+	connect("item_selected", self._on_item_selected)
 
 	var current_locale = TranslationServer.get_locale()
 	var idx = _find_locale_index(current_locale)

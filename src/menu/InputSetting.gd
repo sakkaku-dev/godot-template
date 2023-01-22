@@ -2,10 +2,10 @@ extends Control
 
 const INPUT_SECTION = "input"
 
-export(Array, String) var actions = []
+@export var actions: Array[String] = []
 
-onready var input_grid := $InputGrid
-onready var popup := $RemapKeyPopup
+@onready var input_grid := $InputGrid
+@onready var popup := $RemapKeyPopup
 
 var _logger = Logger.new("InputSetting")
 var _current_remap = null
@@ -27,7 +27,7 @@ func _ready():
 		label.text = action
 		input_grid.add_child(label)
 		
-		button.connect("pressed", self, "_on_remap_pressed", [button])
+		button.connect("pressed", func(): _on_remap_pressed(button))
 		input_grid.add_child(button)
 
 

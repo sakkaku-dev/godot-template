@@ -1,7 +1,7 @@
 extends Node
 
-export var input_path: NodePath
-onready var input: PlayerInput = get_node(input_path) if input_path else get_parent()
+@export var input_path: NodePath
+@onready var input: PlayerInput = get_node(input_path) if input_path else get_parent()
 
 var logger = Logger.new("DeviceSwitcher")
 

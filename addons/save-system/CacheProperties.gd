@@ -1,9 +1,9 @@
 class_name CacheProperties
 extends Node
 
-export var properties: PoolStringArray
-export var node_path: NodePath
-onready var node := get_node(node_path) if node_path else get_parent()
+@export var properties: Array[String]
+@export var node_path: NodePath
+@onready var node := get_node(node_path) if node_path else get_parent()
 
 var logger = Logger.new("SaveProperties")
 

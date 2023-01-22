@@ -1,59 +1,67 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://b8dxgonvi2qp2"]
 
-[ext_resource path="res://addons/scene-manager/Transition.gdshader" type="Shader" id=1]
-[ext_resource path="res://addons/scene-manager/shader_patterns/horizontal.png" type="Texture" id=2]
-[ext_resource path="res://addons/scene-manager/SceneManager.gd" type="Script" id=3]
+[ext_resource type="Shader" path="res://addons/scene-manager/Transition.gdshader" id="1"]
+[ext_resource type="Script" path="res://addons/scene-manager/SceneManager.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://qk8r7gwn8vqa" path="res://addons/scene-manager/shader_patterns/horizontal.png" id="3_7savm"]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_param/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 1.0 ]
+"values": [1.0]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "Transition"
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_param/cutoff")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 1.0, 0.0 ]
+"values": [1.0, 0.0]
 }
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 1 )
-shader_param/cutoff = 1.0
-shader_param/smooth_size = null
-shader_param/inverted = false
-shader_param/mask = ExtResource( 2 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_apmo3"]
+_data = {
+"RESET": SubResource("2"),
+"Transition": SubResource("3")
+}
+
+[sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("1")
+shader_parameter/cutoff = 1.0
+shader_parameter/smooth_size = 0.002
+shader_parameter/inverted = true
+shader_parameter/mask = ExtResource("3_7savm")
 
 [node name="SceneManager" type="Node"]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 2 )
-anims/Transition = SubResource( 3 )
+libraries = {
+"": SubResource("AnimationLibrary_apmo3")
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-material = SubResource( 1 )
+material = SubResource("1")
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0, 0, 0, 1 )
+color = Color(0, 0, 0, 1)
