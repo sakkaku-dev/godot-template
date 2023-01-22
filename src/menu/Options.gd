@@ -2,8 +2,8 @@ extends Control
 
 const CONFIG_FILE = "user://settings.cfg"
 
-onready var _audio := $Audio
-onready var _input := $Input
+@onready var _audio := $Audio
+@onready var _input := $Input
 
 var _logger = Logger.new("Options")
 var _config = ConfigFile.new()

@@ -5,16 +5,16 @@ var _values = {}
 
 func parse(file_path: String) -> Stylesheet:
 	_values = {}
-	var file = File.new()
-	if not file.file_exists(file_path):
-		print("File %s does not exist" % file_path)
-		return null
-
 	if not file_path.ends_with(".css"):
 		print("File %s is not a css file" % file_path)
 		return null
+		
+	if not FileAccess.file_exists(file_path):
+		print("File %s does not exist" % file_path)
+		return null
 
-	if file.open(file_path, File.READ) != OK:
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	if file == null:
 		print("Failed to open file %s" % file_path)
 		return null
 
