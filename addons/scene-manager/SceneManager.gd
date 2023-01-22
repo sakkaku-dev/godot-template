@@ -12,7 +12,7 @@ var transitioning = false
 
 func _input(event):
 	if transitioning:
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 
 func reload_scene():

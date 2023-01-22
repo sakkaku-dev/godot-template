@@ -1,10 +1,13 @@
 class_name RemapButton
 extends Button
 
-var action := ""
+@export var disable = false
+@export var action := ""
+
 var input := PlayerInput.new()
 
 func _ready():
+	disabled = disable
 	_update()
 
 func _update():

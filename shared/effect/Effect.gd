@@ -12,8 +12,8 @@ var tween: Tween
 func _ready():
 	tween = get_tree().create_tween()
 	setup()
-	tween.start()
-	tween.connect("tween_all_completed", _on_tween_completed)
+	tween.play()
+	tween.connect("finished", _on_tween_completed)
 
 func _on_tween_completed():
 	queue_free()
@@ -23,9 +23,11 @@ func _interpolate_node(node: Node, property: String, start_value, end_value):
 	var start = node.get(start_value) if start_value is String else start_value
 	var end = node.get(end_value) if end_value is String else end_value
 
-	tween.interpolate_property(
-		node, property, start, end, duration, transition, ease_type, delay
-	)
+	tween.tween_property(node, property, end, duration) \
+		.from(start) \
+		.set_delay(delay) \
+		.set_ease(ease_type) \
+		.set_trans(transition)
 
 	node.set(property, start)
 

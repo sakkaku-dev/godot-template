@@ -91,7 +91,7 @@ static func to_text(type: int) -> String:
 static func to_event(type: int) -> InputEvent:
 	if type <= 0:
 		var key = InputEventKey.new()
-		key.scancode = -type
+		key.keycode = -type
 		return key
 		
 	if type >= Key.JOYSTICK_L_UP and type <= Key.JOYSTICK_R_LEFT:
@@ -120,7 +120,7 @@ static func to_event(type: int) -> InputEvent:
 	
 static func to_type(event: InputEvent) -> int:
 	if event is InputEventKey:
-		return -event.scancode
+		return -event.keycode
 	
 	if event is InputEventJoypadMotion and event.axis_value != 0:
 		for key in JOY_MOTION_MAP:
