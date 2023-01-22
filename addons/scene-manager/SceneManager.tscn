@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/scene-system/Transition.gdshader" type="Shader" id=1]
-[ext_resource path="res://addons/scene-system/shader_patterns/circle.png" type="Texture" id=2]
-[ext_resource path="res://addons/scene-system/SceneManager.gd" type="Script" id=3]
+[ext_resource path="res://addons/scene-manager/SceneManager.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -36,10 +35,6 @@ tracks/0/keys = {
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
-shader_param/cutoff = 1.0
-shader_param/smooth_size = 0.0
-shader_param/inverted = false
-shader_param/mask = ExtResource( 2 )
 
 [node name="SceneManager" type="Node"]
 script = ExtResource( 3 )
