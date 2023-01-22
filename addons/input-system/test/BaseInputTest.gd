@@ -31,3 +31,15 @@ func joypad_motion_event(axis: int, value: float) -> InputEvent:
 	joy.axis = axis
 	joy.axis_value = value
 	return joy
+
+
+func mouse_event(button: int) -> InputEvent:
+	var mouse = InputEventMouseButton.new()
+	mouse.button_index = button
+	return mouse
+
+
+func key_event(code: int) -> InputEvent:
+	var key = InputEventKey.new()
+	key.scancode = code
+	return key
