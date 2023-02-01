@@ -1,6 +1,8 @@
 class_name Effect
 extends Node
 
+signal finished()
+
 @export var delay = 0.0
 @export var duration = 0.5
 @export var reverse = true
@@ -13,9 +15,10 @@ func _ready():
 	tween = get_tree().create_tween()
 	setup()
 	tween.play()
-	tween.connect("finished", _on_tween_completed)
+	tween.finished.connect(_on_tween_completed)
 
 func _on_tween_completed():
+	finished.emit()
 	queue_free()
 
 
