@@ -8,8 +8,8 @@ signal finished()
 @export var reverse = true
 @export var loop = false
 
-var transition = Tween.TRANS_LINEAR
-var ease_type = Tween.EASE_IN_OUT
+@export var transition = Tween.TRANS_LINEAR
+@export var ease_type = Tween.EASE_IN_OUT
 var tween: Tween
 
 func _ready():
