@@ -1,4 +1,4 @@
-extends Area2D
+class_name Hand extends Area2D
 
 var last_interacted: Interactable
 var closest: Interactable
