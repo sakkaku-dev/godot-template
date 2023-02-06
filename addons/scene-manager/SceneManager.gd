@@ -30,11 +30,10 @@ const TRANSITION_MAP = {
 	Transition.RADIAL: "radial.png",
 }
 
-const DEFAULT_SPEED = 2
+const DEFAULT_SPEED = 1
 
 @export var disable_inputs = true
 
-@onready var anim := $AnimationPlayer
 @onready var rect: ColorRect = $CanvasLayer/ColorRect
 
 var transitioning = false
@@ -48,7 +47,7 @@ func reload_scene():
 	change_scene(get_tree().current_scene.filename)
 
 
-func change_scene(scene, transition = Transition.FULL, speed = DEFAULT_SPEED):
+func change_scene(scene, transition = null, speed = DEFAULT_SPEED):
 	var path = scene
 	if scene is PackedScene:
 		path = scene.resource_path
@@ -62,22 +61,15 @@ func change_scene(scene, transition = Transition.FULL, speed = DEFAULT_SPEED):
 	emit_signal("scene_changed")
 
 
-func _play_transition(speed: float, backwards: bool):
-	anim.speed_scale = speed
-	if backwards:
-		anim.play_backwards("Transition")
-	else:
-		anim.play("Transition")
-	await anim.animation_finished
-
-
-func _fade(reverse: bool, transition: Transition, speed: float):
+func _fade(reverse: bool, transition, speed: float):
 	var eff = Effect.new()
-	var start = 0.0 if reverse else 1.0
-	var end = 1.0 if reverse else 0.0
-	eff.setup_props("shader_parameter/cutoff", start, end)
+	var start = 1.0 if reverse else 0.0
+	var end = 0.0 if reverse else 1.0
+	eff.setup_props("shader_parameter/dissolve_amount", start, end)
 	var mat: ShaderMaterial = rect.get_material()
-	mat.set("shader_parameter/mask", load(SHADER_DIR + "/" + TRANSITION_MAP[transition]))
+	if transition:
+		mat.set("shader_parameter/dissolve_texture", load(SHADER_DIR + "/" + TRANSITION_MAP[transition]))
+	mat.set("shader_parameter/fade", transition == null)
 	eff.obj = mat
 	
 	eff.duration = speed
