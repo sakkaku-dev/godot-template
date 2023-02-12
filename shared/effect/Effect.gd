@@ -5,14 +5,63 @@ signal finished()
 
 @export var delay = 0.0
 @export var duration = 0.5
-@export var reverse = true
+@export var reverse = false
 @export var loop = false
+@export var autostart = true
 
 @export var transition = Tween.TRANS_LINEAR
 @export var ease_type = Tween.EASE_IN_OUT
+
+@onready var node = get_parent() if obj == null else obj
+
+var obj
 var tween: Tween
+var property: String
+var start_value
+var end_value
+
 
 func _ready():
+	if autostart:
+		start()
+
+func setup_props(prop: String, start_v, end_v):
+	property = prop
+	start_value = start_v
+	end_value = end_v
+
+# deprecated: directly set the fields
+func setup():
+	_interpolate_node()
+
+
+# deprecated: directly set the fields
+func _interpolate(prop: String, end_v, start_v = prop):
+	setup_props(prop, start_v, end_v)
+	_interpolate_node()
+
+func _interpolate_node():
+	var init_start = node.get(start_value) if start_value is String else start_value
+	var init_end = node.get(end_value) if end_value is String else end_value
+
+	var s = init_end if reverse else init_start
+	var e = init_start if reverse else init_end
+
+	tween.tween_property(node, property, e, duration) \
+		.from(s) \
+		.set_delay(delay) \
+		.set_ease(ease_type) \
+		.set_trans(transition)
+
+	node.set(property, s)
+
+
+func finish():
+	tween.pause()
+	tween.custom_step(delay + duration)
+
+
+func start():
 	_create_tween()
 
 func _create_tween():
@@ -30,26 +79,3 @@ func _on_tween_completed():
 	else:
 		finished.emit()
 		queue_free()
-
-
-func _interpolate_node(node: Node, property: String, start_value, end_value):
-	var start = node.get(start_value) if start_value is String else start_value
-	var end = node.get(end_value) if end_value is String else end_value
-
-	tween.tween_property(node, property, end, duration) \
-		.from(start) \
-		.set_delay(delay) \
-		.set_ease(ease_type) \
-		.set_trans(transition)
-
-	node.set(property, start)
-
-func _interpolate(property: String, end_value, start_value = property):
-	var node = get_parent()
-	if reverse:
-		_interpolate_node(node, property, end_value, start_value)
-	else:
-		_interpolate_node(node, property, start_value, end_value)
-
-func setup():
-	pass
