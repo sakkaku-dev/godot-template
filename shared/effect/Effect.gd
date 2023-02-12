@@ -12,16 +12,20 @@ signal finished()
 @export var transition = Tween.TRANS_LINEAR
 @export var ease_type = Tween.EASE_IN_OUT
 
+@export var property: String
+
 @onready var node = get_parent() if obj == null else obj
 
 var obj
 var tween: Tween
-var property: String
-var start_value
-var end_value
+var start_value = null
+var end_value = null
 
 
 func _ready():
+	if start_value == null:
+		start_value = node.get(property)
+	
 	if autostart:
 		start()
 
