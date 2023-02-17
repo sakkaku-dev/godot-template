@@ -10,7 +10,7 @@ func _handle_event(event: InputEvent):
 		if is_in_sub_menu():
 			menu_stack.pop_back()
 			update_menu()
-			get_tree().set_input_as_handled()
+			get_viewport().set_input_as_handled()
 
 func is_menu_visible():
 	return menu_stack.size() > 0
