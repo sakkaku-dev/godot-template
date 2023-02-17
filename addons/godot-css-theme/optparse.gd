@@ -1,5 +1,5 @@
 # ##############################################################################
-#(G)odot (U)nit (T)est class (https://github.com/bitwes/Gut)
+#(G)odot (U)nit (T)est class
 #
 # ##############################################################################
 # The MIT License (MIT)
@@ -37,12 +37,13 @@
 # See the readme for a list of options and examples.  You can also use the -gh
 # option to get more information about how to use the command line interface.
 # ##############################################################################
-class_name OptParse
 
 #-------------------------------------------------------------------------------
 # Parses the command line arguments supplied into an array that can then be
 # examined and parsed based on how the gut options work.
 #-------------------------------------------------------------------------------
+class_name OptParse
+
 class CmdLineParser:
 	var _used_options = []
 	# an array of arrays.  Each element in this array will contain an option
@@ -127,7 +128,9 @@ class CmdLineParser:
 		for i in range(_opts.size()):
 			to_return.append(_opts[i][0])
 
-		var script_option = to_return.find('-s')
+		var script_option = to_return.find("-s")
+		if script_option == -1:
+			script_option = to_return.find("--script")
 		if script_option != -1:
 			to_return.remove_at(script_option + 1)
 			to_return.remove_at(script_option)
@@ -149,7 +152,7 @@ class Option:
 	var default = null
 	var description = ''
 
-	func _init(name, default_value, desc=''):
+	func _init(name,default_value,desc=''):
 		option_name = name
 		default = default_value
 		description = desc
@@ -173,7 +176,6 @@ class Option:
 # supplied.  Uses Option class and CmdLineParser to extract information from
 # the command line and make it easily accessible.
 #-------------------------------------------------------------------------------
-
 var options = []
 var _opts = []
 var _banner = ''
@@ -237,6 +239,8 @@ func parse():
 				options[i].value = parser.get_array_value(options[i].option_name)
 			elif(t == TYPE_BOOL):
 				options[i].value = parser.was_specified(options[i].option_name)
+			elif(t == TYPE_FLOAT):
+				options[i].value = parser.get_value(options[i].option_name)
 			elif(t == TYPE_NIL):
 				print(options[i].option_name + ' cannot be processed, it has a nil datatype')
 			else:
@@ -244,7 +248,6 @@ func parse():
 
 	var unused = parser.get_unused_options()
 	if(unused.size() > 0):
-		print(options[0].option_name)
 		print("Unrecognized options:  ", unused)
 		return false
 

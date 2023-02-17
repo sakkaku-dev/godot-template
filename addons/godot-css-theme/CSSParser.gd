@@ -19,7 +19,6 @@ func parse(file_path: String) -> Stylesheet:
 		return null
 
 	var content: String = file.get_as_text()  # TODO: use buffer?
-	file.close()
 	return parse_text(content, file_path)
 
 
@@ -50,8 +49,6 @@ func parse_text(content: String, path: String):
 
 	var result = {"": {}}
 	for tag in _values.keys():
-		if not tag:
-			continue
 		var value = _values[tag]
 		if "." in tag:
 			var parts = tag.split(" ")

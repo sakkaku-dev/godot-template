@@ -60,18 +60,5 @@ func _css_folder() -> String:
 	if file.ends_with("/"):
 		file = file.substr(0, file.length() - 2)
 
-	var last_slash = _find_last(file, "/")
+	var last_slash = Options.find_last(file, "/")
 	return file.substr(0, last_slash + 1)
-
-func _find_last(str: String, char: String):
-	var found = []
-	var current_idx = 0
-	
-	while current_idx < str.length():
-		var search = str.find(char, current_idx)
-		if search == -1:
-			break
-		
-		found.append(search)
-		current_idx = search
-	return found[-1]
