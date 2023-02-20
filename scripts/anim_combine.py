@@ -95,7 +95,7 @@ GROUPS = group_sprites(DIR)
 for key in GROUPS:
     new_img = merge_images(GROUPS[key], args.columns)
 
-    name = key.replace("_", "")
+    name = key #.replace("_", "")
     file_name = f'{name}.png'
     new_img.save(OUTPUT + '/' + file_name)
 
