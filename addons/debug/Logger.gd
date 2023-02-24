@@ -8,28 +8,30 @@ func _init(n: String):
 
 
 func info(msg: String):
-	_log_for_level(Env.Level.INFO, msg)
+	_log_for_level(Debug.Level.INFO, msg)
 
 
 func warn(msg: String):
-	_log_for_level(Env.Level.WARN, msg)
+	_log_for_level(Debug.Level.WARN, msg)
 
 
 func error(msg: String):
-	_log_for_level(Env.Level.ERROR, msg)
+	_log_for_level(Debug.Level.ERROR, msg)
 
 
 func debug(msg: String):
-	_log_for_level(Env.Level.DEBUG, msg)
+	_log_for_level(Debug.Level.DEBUG, msg)
 
 
 func trace(msg: String):
-	_log_for_level(Env.Level.TRACE, msg)
+	_log_for_level(Debug.Level.TRACE, msg)
 
 
 func _log_for_level(level: int, msg: String):
-	if level <= Env.log_level:
-		print("[%s - %s]: %s" % [_now(), name, msg])
+	if level <= Debug.log_level:
+		var text = "[%s - %s]: %s" % [_now(), name, msg]
+		print(text)
+		Debug.print_line(text)
 
 
 func _now() -> String:
