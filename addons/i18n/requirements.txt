@@ -1,2 +1,2 @@
-Babel==2.10.3
-git+https://github.com/sakkaku-dev/pybabel-godot.git@option-items#egg=babel-godot
+Babel==2.12.1
+git+https://github.com/sakkaku-dev/pybabel-godot.git@custom-extended#egg=babel-godot
