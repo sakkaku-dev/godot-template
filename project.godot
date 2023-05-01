@@ -14,7 +14,7 @@ config/name="##VAR_GAME_NAME"
 run/main_scene="res://src/Start.tscn"
 config/features=PackedStringArray("4.0")
 boot_splash/bg_color=Color(0.101961, 0.101961, 0.101961, 1)
-config/icon="res://icon.png"
+config/icon="res://icon.svg"
 
 [autoload]
 

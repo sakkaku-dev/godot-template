@@ -31,6 +31,8 @@ def group_sprites(dir):
         if entry.name.endswith('.png'):
             pattern = re.compile(r"(-)?\d+\.png$")
             prefix = pattern.split(entry.name)[0]
+            if prefix.endswith('_'):
+                prefix = prefix[:-1]
 
             if groups.get(prefix) is None:
                 groups[prefix] = []
