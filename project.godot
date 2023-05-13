@@ -11,14 +11,13 @@ config_version=5
 [application]
 
 config/name="##VAR_GAME_NAME"
-run/main_scene="res://src/Start.tscn"
+run/main_scene="res://src/game.tscn"
 config/features=PackedStringArray("4.0")
 boot_splash/bg_color=Color(0.101961, 0.101961, 0.101961, 1)
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://src/GameManager.tscn"
 Env="*res://addons/debug/Env.gd"
 SceneManager="*res://addons/scene-manager/SceneManager.tscn"
 Debug="*res://addons/debug/Debug.tscn"
