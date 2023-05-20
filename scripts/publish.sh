@@ -6,14 +6,10 @@
 # butler
 
 GAME="##VAR_GAME_NAME"
-VERSION=$1
-if [[ -z $VERSION ]]; then
-   echo "Version missing"
-   exit 0
-fi
+VERSION="$1"
 
 ARGS=("$@")
-if [[ ${#ARGS[@]} == 1 ]]; then
+if [[ ${#ARGS[@]} -lt 2 ]]; then
     echo "No channels"
     exit 0
 fi
@@ -67,13 +63,19 @@ itch_release() {
     done
 }
 
-generate_changelog
-
-sh ./addons/debug/prepare-build.sh
+# sh ./addons/debug/prepare-build.sh $VERSION
 build_channels
 
-if [[ $VERSION != *"-rc"* ]]; then
-    itch_release
-fi
+VERSION_REGEX='^v[0-9]+\.[0-9]+\.[0-9]+(-rc[0-9]+)?$'
+if [[ $VERSION =~ $VERSION_REGEX ]]; then
+    generate_changelog
 
-github_release
+    if [[ $VERSION != *"-rc"* ]]; then
+        itch_release
+    fi
+
+    github_release
+
+else
+    echo "Missing or invalid version. Publish skipped."
+fi
