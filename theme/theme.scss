@@ -1,3 +1,19 @@
+$text-color: Color(0.9, 0.75, 1, 0.7);
+$hover-color: Color(1, 1, 1, 1);
+
 body {
   font-family: url(jackeyfont.ttf);
+}
+
+Button {
+  background: none;
+  color: #{$text-color};
+  padding: 2;
+}
+
+Button:hover,
+Button:pressed,
+Button:focus {
+  background: none;
+  color: #{$hover-color};
 }
