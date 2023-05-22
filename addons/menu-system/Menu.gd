@@ -28,6 +28,8 @@ func clear_menu():
 
 func update_menu():
 	for child in get_children():
+		if child.name.begins_with("_") or not child is Control:
+			continue
 		child.hide()
 	
 	if menu_stack.size() > 0:
