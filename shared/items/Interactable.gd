@@ -5,19 +5,20 @@ signal interacted
 
 const OUTLINE = preload("res://shared/items/sprite_outline.tres")
 
-@export var sprite_path: NodePath
-@onready var sprite: Sprite2D = get_node(sprite_path)
+@export var sprite: Sprite2D
 
+func _ready():
+	sprite.material = OUTLINE
 
 func highlight():
-	if sprite and not sprite.material:
-		sprite.material = OUTLINE
+	var mat = sprite.material as ShaderMaterial
+	mat.set_shader_parameter("enable", true)
 
 
 func unhighlight():
-	if sprite and sprite.material:
-		sprite.material = null
+	var mat = sprite.material as ShaderMaterial
+	mat.set_shader_parameter("enable", false)
 
 
 func interact():
-	emit_signal("interacted")
+	interacted.emit()

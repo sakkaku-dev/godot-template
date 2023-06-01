@@ -23,9 +23,7 @@ func get_input() -> InputEvent:
 
 
 func remap_input(ev: InputEvent) -> void:
-	var existing = get_input()
-	if existing:
-		InputMap.action_erase_event(action, existing)
+	InputMap.action_erase_events(action)
 	InputMap.action_add_event(action, ev)
 	
 	_update()

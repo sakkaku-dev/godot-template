@@ -30,10 +30,11 @@ const TRANSITION_MAP = {
 	Transition.RADIAL: "radial.png",
 }
 
-const DEFAULT_SPEED = 1
+const DEFAULT_SPEED = 1.5
 
 @export var disable_inputs = true
 
+@onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var rect: ColorRect = $CanvasLayer/ColorRect
 
 var transitioning = false
@@ -44,7 +45,7 @@ func _input(event):
 
 
 func reload_scene():
-	change_scene(get_tree().current_scene.filename)
+	change_scene(get_tree().current_scene.scene_file_path)
 
 
 func change_scene(scene, transition = null, speed = DEFAULT_SPEED):
@@ -53,25 +54,28 @@ func change_scene(scene, transition = null, speed = DEFAULT_SPEED):
 		path = scene.resource_path
 	transitioning = true
 	
-	await _fade(false, transition, speed)
-	get_tree().change_scene_to_file(path)
-	await _fade(true, transition, speed)
+	anim.play("fade_out", -1, speed)
+	await anim.animation_finished
 
+	get_tree().change_scene_to_file(path)
+
+	anim.play("fade_in", -1, speed)
 	transitioning = false
+	await anim.animation_finished
+
 	emit_signal("scene_changed")
 
-
-func _fade(reverse: bool, transition, speed: float):
-	var eff = Effect.new()
-	var start = 1.0 if reverse else 0.0
-	var end = 0.0 if reverse else 1.0
-	eff.setup_props("shader_parameter/dissolve_amount", start, end)
-	var mat: ShaderMaterial = rect.get_material()
-	if transition:
-		mat.set("shader_parameter/dissolve_texture", load(SHADER_DIR + "/" + TRANSITION_MAP[transition]))
-	mat.set("shader_parameter/fade", transition == null)
-	eff.obj = mat
+# func _fade(reverse: bool, transition, speed: float):
+# 	var eff = Effect.new()
+# 	var start = 1.0 if reverse else 0.0
+# 	var end = 0.0 if reverse else 1.0
+# 	eff.setup_props("shader_parameter/dissolve_amount", start, end)
+# 	var mat: ShaderMaterial = rect.get_material()
+# 	if transition:
+# 		mat.set("shader_parameter/dissolve_texture", load(SHADER_DIR + "/" + TRANSITION_MAP[transition]))
+# 	mat.set("shader_parameter/fade", transition == null)
+# 	eff.obj = mat
 	
-	eff.duration = speed
-	add_child(eff)
-	await eff.finished
+# 	eff.duration = speed
+# 	add_child(eff)
+# 	await eff.finished

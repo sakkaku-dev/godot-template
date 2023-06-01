@@ -35,11 +35,10 @@ func _register_action(event: InputEvent, action: String):
 	if event.is_action_pressed(action):
 		if not inputs.has(action):
 			inputs.append(action)
-			emit_signal("just_pressed", event)
+		emit_signal("just_pressed", event)
 	if event.is_action_released(action):
-		if inputs.has(action):
-			inputs.erase(action)
-			emit_signal("just_released", event)
+		inputs.erase(action)
+		emit_signal("just_released", event)
 
 
 func _get_actions_for_event(event: InputEvent) -> Array:
