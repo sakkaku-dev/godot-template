@@ -10,7 +10,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:3.4.4
+      image: barichello/godot-ci:4.0.3
     strategy:
       matrix:
         # Remove channel if not releasing (Available: win, linux, mac, web, android)
@@ -18,14 +18,15 @@ jobs:
     env:
       GAME: ##VAR_GAME_NAME
       CHANNEL: ${{matrix.channel}}
-      GODOT_VERSION: 3.4.4
+      GODOT_VERSION: 4.0.3
     steps:
       - uses: actions/checkout@v3
         with:
           lfs: true
+          submodules: true
 
-      - name: Setup Templates
-        run: ./scripts/ci/prepare-templates.sh
+      #- name: Setup Templates
+      #  run: ./scripts/ci/prepare-templates.sh
 
       - name: Prepare android release
         env:
@@ -47,7 +48,7 @@ jobs:
         run: ./addons/debug/prepare-build.sh $GITHUB_REF_NAME
 
       - name: Build
-        run: ./scripts/ci/build-channel.sh $CHANNEL
+        run: ./scripts/build-channel.sh $CHANNEL
 
       - name: Publish Itch
         if: env.BUTLER_API_KEY && env.USER && env.GAME && !contains(github.ref, '-rc')
@@ -65,21 +66,13 @@ jobs:
           cd build
           mv $CHANNEL $GAME && zip -r $GAME-$CHANNEL.zip $GAME
 
-      # Upload exported build
       - name: Upload artifacts
-        if: env.CHANNEL != 'android'
         uses: actions/upload-artifact@v3
         with:
           name: release
-          path: build/**/*.zip
+          path: build/**/*.[za][ia][pb] # zip | aab
 
-      - name: Upload android
-        if: env.CHANNEL == 'android'
-        uses: actions/upload-artifact@v3
-        with:
-          name: release
-          path: build/**/*.aab
-
+  # Run after every channel finished
   github-release:
     runs-on: ubuntu-latest
     needs: release
