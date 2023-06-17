@@ -40,7 +40,7 @@ build_channels() {
 github_release() {
     echo "Releasing version $VERSION to github for $CHANNELS"
 
-    cd build
+    cd godot/build
     mkdir -p gh-releases
     for CHANNEL in "${CHANNELS[@]}"; do
         echo "Archiving $CHANNEL"
@@ -59,7 +59,7 @@ itch_release() {
 
     for CHANNEL in "${CHANNELS[@]}"; do
         echo "Releasing $CHANNEL"
-        butler push build/$CHANNEL kuma-gee/$GAME:$CHANNEL --userversion $VERSION
+        butler push godot/build/$CHANNEL kuma-gee/$GAME:$CHANNEL --userversion $VERSION
     done
 }
 

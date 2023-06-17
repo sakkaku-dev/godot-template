@@ -1,10 +1,9 @@
 name: Release
 
 on:
-  workflow_dispatch: {}
-  # push:
-  #   tags:
-  #     - "v*.*.*"
+  push:
+    tags:
+      - "v*.*.*"
 
 jobs:
   release:
@@ -44,11 +43,8 @@ jobs:
           sed 's@keystore/release_user=".*"@keystore/release_user="'$ANDROID_KEYSTORE_USER'"@g' -i export_presets.cfg
           sed 's@keystore/release_password=".*"@keystore/release_password="'$ANDROID_KEYSTORE_PW'"@g' -i export_presets.cfg
 
-      - name: Prepare Build
-        run: ./addons/debug/prepare-build.sh $GITHUB_REF_NAME
-
       - name: Build
-        run: ./scripts/build-channel.sh $CHANNEL
+        run: ./scripts/build-channel.sh $CHANNEL $GITHUB_REF_NAME
 
       - name: Publish Itch
         if: env.BUTLER_API_KEY && env.USER && env.GAME && !contains(github.ref, '-rc')

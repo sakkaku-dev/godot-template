@@ -6,7 +6,7 @@ if [ -z $GAME_NAME ]; then
 fi
 
 echo "Setting game name to $GAME_NAME"
-sed -e "/config\/name/ s/\".*\"/\"$GAME_NAME\"/" -i project.godot
+sed -e "/config\/name/ s/\".*\"/\"$GAME_NAME\"/" -i godot/project.godot
 sed -e "/GAME=/ s/\".*\"/\"$GAME_NAME\"/" -i scripts/publish.sh
 
 # sed -i "s/##VAR_GAME_NAME/$GAME_NAME/g" project.godot

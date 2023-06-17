@@ -8,11 +8,12 @@ jobs:
     name: Publish Web
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:3.5.1
+      image: barichello/godot-ci:4.0.3
     steps:
       - uses: actions/checkout@v3
         with:
           lfs: true
+          submodules: true
       - run: ./scripts/ci/prepare-templates.sh
       - run: ./scripts/ci/build-channel.sh web
       - run: apt-get update && apt-get install -y rsync
