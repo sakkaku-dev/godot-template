@@ -9,42 +9,25 @@ jobs:
   release:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:4.0.3
+      image: barichello/godot-ci:4.1
     strategy:
       matrix:
-        # Remove channel if not releasing (Available: win, linux, mac, web, android)
-        channel: [win, linux]
+        channel: [win, linux, web, macOS]
     env:
       GAME: ##VAR_GAME_NAME
       CHANNEL: ${{matrix.channel}}
-      GODOT_VERSION: 4.0.3
+      GODOT_VERSION: 4.1
     steps:
       - uses: actions/checkout@v3
         with:
           lfs: true
-          submodules: true
-
-      #- name: Setup Templates
-      #  run: ./scripts/ci/prepare-templates.sh
-
-      - name: Prepare android release
-        env:
-          ANDROID_KEYSTORE: ${{secrets.ANDROID_RELEASE_KEYSTORE}}
-          ANDROID_KEYSTORE_USER: ${{secrets.ANDROID_RELEASE_KEYSTORE_USER}}
-          ANDROID_KEYSTORE_PW: ${{secrets.ANDROID_RELEASE_KEYSTORE_PW}}
-        if: |
-          env.CHANNEL == 'android' &&
-          env.ANDROID_KEYSTORE &&
-          env.ANDROID_KEYSTORE_USER &&
-          env.ANDROID_KEYSTORE_PW
-        run: |
-          echo $ANDROID_KEYSTORE | base64 --decode > ./release.keystore
-          sed 's@keystore/release=".*"@keystore/release="'./release.keystore'"@g' -i export_presets.cfg
-          sed 's@keystore/release_user=".*"@keystore/release_user="'$ANDROID_KEYSTORE_USER'"@g' -i export_presets.cfg
-          sed 's@keystore/release_password=".*"@keystore/release_password="'$ANDROID_KEYSTORE_PW'"@g' -i export_presets.cfg
+      - name: Setup Templates
+        run: ./scripts/prepare-templates.sh $GODOT_VERSION
+      # - name: Prepare Build
+      #   run: ./addons/debug/prepare-build.sh $GITHUB_REF_NAME
 
       - name: Build
-        run: ./scripts/build-channel.sh $CHANNEL $GITHUB_REF_NAME
+        run: ./scripts/build-channel.sh $CHANNEL
 
       - name: Publish Itch
         if: env.BUTLER_API_KEY && env.USER && env.GAME && !contains(github.ref, '-rc')
@@ -55,30 +38,38 @@ jobs:
         run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion $GITHUB_REF_NAME
 
       - name: Package builds
-        if: |
-          env.CHANNEL != 'android' &&
-          env.CHANNEL != 'mac'
+        if: env.CHANNEL != 'mac'
         run: |
           cd build
           mv $CHANNEL $GAME && zip -r $GAME-$CHANNEL.zip $GAME
 
+      # Upload exported build
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: release
-          path: build/**/*.[za][ia][pb] # zip | aab
+          path: build/**/*.zip
 
-  # Run after every channel finished
   github-release:
     runs-on: ubuntu-latest
     needs: release
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: echo "latest_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+      - run: echo "prev_tag=$(git tag | sort --version-sort | tail -n2 | head -1)" >> $GITHUB_ENV
+      - run: npm ci && npm run changelog -- -t ${{env.prev_tag}}..${{env.latest_tag}}
       - uses: actions/download-artifact@v3
         with:
           name: release
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          body_path: CHANGELOG.md
           prerelease: false
           files: |
             **/*.zip
