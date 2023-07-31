@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgx504m7uhs0y"]
-
-[ext_resource type="Script" path="res://addons/i18n/menu/LanguageSelect.gd" id="2"]
-
-[node name="LanguageSelect" type="OptionButton"]
-script = ExtResource("2")
