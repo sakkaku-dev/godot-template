@@ -1,15 +1,15 @@
 name: Test
 
-# on:
-#   push:
-#     branches: [master]
+on:
+  push:
+    branches: [master]
 
 jobs:
   tests:
     name: Run Unit Tests
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:4.0.3
+      image: barichello/godot-ci:4.1
     steps:
       - uses: actions/checkout@v3
         with:
