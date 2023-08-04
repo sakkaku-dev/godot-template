@@ -16,4 +16,4 @@ jobs:
           lfs: true
           submodules: true
       - run: sh scripts/test.sh
-        timeout-minutes: 5
+        timeout-minutes: 1
