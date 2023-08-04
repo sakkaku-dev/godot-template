@@ -5,7 +5,7 @@
 # github-cli
 # butler
 
-GAME="##VAR_GAME_NAME"
+GAME="##VAR_GAME"
 VERSION="$1"
 
 ARGS=("$@")
@@ -38,9 +38,9 @@ build_channels() {
 }
 
 github_release() {
-    echo "Releasing version $VERSION to github for $CHANNELS"
+    echo "Releasing version $VERSION to github"
 
-    cd godot/build
+    cd build
     mkdir -p gh-releases
     for CHANNEL in "${CHANNELS[@]}"; do
         echo "Archiving $CHANNEL"
@@ -55,11 +55,11 @@ github_release() {
 }
 
 itch_release() {
-    echo "Releasing version $VERSION to itch.io for $CHANNELS"
+    echo "Releasing version $VERSION to itch.io"
 
     for CHANNEL in "${CHANNELS[@]}"; do
         echo "Releasing $CHANNEL"
-        butler push godot/build/$CHANNEL kuma-gee/$GAME:$CHANNEL --userversion $VERSION
+        butler push build/$CHANNEL kuma-gee/$GAME:$CHANNEL --userversion $VERSION
     done
 }
 
