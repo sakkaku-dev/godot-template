@@ -2,3 +2,4 @@ build/
 *.css*
 _sprites/
 .godot/
+node_modules
