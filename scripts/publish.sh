@@ -8,15 +8,8 @@
 GAME="##VAR_GAME_NAME"
 VERSION="$1"
 
-ARGS=("$@")
-if [[ ${#ARGS[@]} -lt 2 ]]; then
-    echo "No channels"
-    exit 0
-fi
-shift
-
-# win, linux, Web, macOS, android
-CHANNELS=( "$@" )
+# win, linux, web, macOS, android
+CHANNELS=("web" "linux" "win" "macOS")
 LAST_TAG=$(git describe --tags --abbrev=0)
 CHANGELOG=""
 
@@ -24,9 +17,8 @@ generate_changelog() {
     echo "Generating changelog"
     touch package.json
     echo "{}" > package.json
-    changelog -p -t $LAST_TAG -f CHANGELOG.md
+    changelog -t $LAST_TAG -f CHANGELOG.md
     CHANGELOG=$(cat CHANGELOG.md)
-    rm package.json
     rm CHANGELOG.md
 }
 
@@ -63,11 +55,10 @@ itch_release() {
     done
 }
 
-# sh ./addons/debug/prepare-build.sh $VERSION
-build_channels
-
 VERSION_REGEX='^v[0-9]+\.[0-9]+\.[0-9]+(-rc[0-9]+)?$'
 if [[ $VERSION =~ $VERSION_REGEX ]]; then
+    sh ./scripts/prepare-build.sh $VERSION
+    build_channels
     generate_changelog
 
     if [[ $VERSION != *"-rc"* ]]; then
@@ -77,5 +68,6 @@ if [[ $VERSION =~ $VERSION_REGEX ]]; then
     github_release
 
 else
+    build_channels
     echo "Missing or invalid version. Publish skipped."
 fi
