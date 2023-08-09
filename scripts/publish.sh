@@ -15,8 +15,6 @@ CHANGELOG=""
 
 generate_changelog() {
     echo "Generating changelog"
-    touch package.json
-    echo "{}" > package.json
     changelog -t $LAST_TAG -f CHANGELOG.md
     CHANGELOG=$(cat CHANGELOG.md)
     rm CHANGELOG.md
