@@ -23,8 +23,9 @@ jobs:
           lfs: true
       - name: Setup Templates
         run: ./scripts/prepare-templates.sh $GODOT_VERSION
-      # - name: Prepare Build
-      #   run: ./addons/debug/prepare-build.sh $GITHUB_REF_NAME
+
+      - name: Prepare Build
+        run: ./scripts/prepare-build.sh $GITHUB_REF_NAME
 
       - name: Build
         run: ./scripts/build-channel.sh $CHANNEL
