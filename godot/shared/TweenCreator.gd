@@ -35,17 +35,21 @@ func fade_in(node, duration = default_duration):
 	return tw.tween_property(node, "modulate", Color.WHITE, duration).from(Color.TRANSPARENT).set_ease(Tween.EASE_OUT)
 
 func slide_in(node, dir: Vector2, pos = Vector2.ZERO, dist = node.size, duration = default_duration):
-	return tw.tween_property(node, "position", pos, duration).from(pos - dir * dist).set_ease(Tween.EASE_OUT)
+	return move(node, pos - dir * dist, pos, duration).set_ease(Tween.EASE_OUT)
 
 func slide_out(node, dir: Vector2, dist = node.size, duration = default_duration):
-	return tw.tween_property(node, "position", node.position + dir * dist, duration).from(node.position).set_ease(Tween.EASE_IN)
+	return move(node, node.position, node.position + dir * dist, duration).set_ease(Tween.EASE_IN)
+
+func move(node, from: Vector2, to: Vector2, duration = default_duration):
+	return tw.tween_property(node, "position", to, duration).from(from)
 
 func scale_in(node, target_scale = Vector2(1, 1), duration = default_duration):
-	if node is Control:
-		node.pivot_offset = node.size / 2
-	return tw.tween_property(node, "scale", target_scale, duration).from(Vector2.ZERO).set_ease(Tween.EASE_OUT)
-
+	return scale(node, Vector2.ZERO, target_scale, duration).set_ease(Tween.EASE_OUT)
+	
 func scale_out(node, init_scale = Vector2(1, 1), duration = default_duration):
+	return scale(node, init_scale, Vector2.ZERO, duration).set_ease(Tween.EASE_IN)
+	
+func scale(node, from: Vector2, to: Vector2, duration = default_duration):
 	if node is Control:
 		node.pivot_offset = node.size / 2
-	return tw.tween_property(node, "scale", Vector2.ZERO, duration).from(init_scale).set_ease(Tween.EASE_IN)
+	return tw.tween_property(node, "scale", to, duration).from(from)
