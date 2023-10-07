@@ -28,28 +28,28 @@ func new_tween(on_finish = null):
 		tw.finished.connect(on_finish)
 	return true
 
-func fade_out(node, duration = default_duration):
-	return tw.tween_property(node, "modulate", Color.TRANSPARENT, duration).from(Color.WHITE).set_ease(Tween.EASE_IN)
+func fade_out(n, duration = default_duration):
+	return prop(n, "modulate", Color.WHITE, Color.TRANSPARENT, duration).set_ease(Tween.EASE_IN)
 
-func fade_in(node, duration = default_duration):
-	return tw.tween_property(node, "modulate", Color.WHITE, duration).from(Color.TRANSPARENT).set_ease(Tween.EASE_OUT)
+func fade_in(n, duration = default_duration):
+	return prop(n, "modulate", Color.TRANSPARENT, Color.WHITE, duration).set_ease(Tween.EASE_OUT)
 
-func slide_in(node, dir: Vector2, pos = Vector2.ZERO, dist = node.size, duration = default_duration):
-	return move(node, pos - dir * dist, pos, duration).set_ease(Tween.EASE_OUT)
+func slide_in(n, dir: Vector2, pos = Vector2.ZERO, dist = n.size, duration = default_duration):
+	return prop(n, "position", pos - dir * dist, pos, duration).set_ease(Tween.EASE_OUT)
 
-func slide_out(node, dir: Vector2, dist = node.size, duration = default_duration):
-	return move(node, node.position, node.position + dir * dist, duration).set_ease(Tween.EASE_IN)
+func slide_out(n, dir: Vector2, dist = n.size, duration = default_duration):
+	return prop(n, "position", n.position, n.position + dir * dist, duration).set_ease(Tween.EASE_IN)
 
-func move(node, from: Vector2, to: Vector2, duration = default_duration):
-	return tw.tween_property(node, "position", to, duration).from(from)
-
-func scale_in(node, target_scale = Vector2(1, 1), duration = default_duration):
-	return scale(node, Vector2.ZERO, target_scale, duration).set_ease(Tween.EASE_OUT)
+func scale_in(n, target_scale = Vector2(1, 1), duration = default_duration):
+	return scale(n, Vector2.ZERO, target_scale, duration).set_ease(Tween.EASE_OUT)
 	
-func scale_out(node, init_scale = Vector2(1, 1), duration = default_duration):
-	return scale(node, init_scale, Vector2.ZERO, duration).set_ease(Tween.EASE_IN)
+func scale_out(n, init_scale = Vector2(1, 1), duration = default_duration):
+	return scale(n, init_scale, Vector2.ZERO, duration).set_ease(Tween.EASE_IN)
 	
-func scale(node, from: Vector2, to: Vector2, duration = default_duration):
-	if node is Control:
-		node.pivot_offset = node.size / 2
-	return tw.tween_property(node, "scale", to, duration).from(from)
+func scale(n, from: Vector2, to: Vector2, duration = default_duration):
+	if n is Control:
+		n.pivot_offset = n.size / 2
+	return prop(n, "scale", from, to, duration)
+
+func prop(n, p: String, from, to, duration = default_duration):
+	return tw.tween_property(n, p, to, duration).from(from)

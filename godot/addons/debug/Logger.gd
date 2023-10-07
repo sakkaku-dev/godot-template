@@ -1,38 +1,38 @@
 class_name Logger
 
-var name = ""
+enum Level {
+	OFF,
+	ERROR,
+	WARN,
+	INFO,
+	DEBUG,
+	TRACE,
+}
 
+var name = ""
 
 func _init(n: String):
 	name = n
 
-
 func info(msg: String):
-	_log_for_level(Debug.Level.INFO, msg)
-
+	_log_for_level(Level.INFO, msg)
 
 func warn(msg: String):
-	_log_for_level(Debug.Level.WARN, msg)
-
+	_log_for_level(Level.WARN, msg)
 
 func error(msg: String):
-	_log_for_level(Debug.Level.ERROR, msg)
-
+	_log_for_level(Level.ERROR, msg)
 
 func debug(msg: String):
-	_log_for_level(Debug.Level.DEBUG, msg)
-
+	_log_for_level(Level.DEBUG, msg)
 
 func trace(msg: String):
-	_log_for_level(Debug.Level.TRACE, msg)
-
+	_log_for_level(Level.TRACE, msg)
 
 func _log_for_level(level: int, msg: String):
-	if level <= Debug.log_level:
+	if level <= Env.log_level:
 		var text = "[%s - %s]: %s" % [_now(), name, msg]
 		print(text)
-		Debug.print_line(text)
-
 
 func _now() -> String:
 	var dt = Time.get_datetime_dict_from_system()
@@ -43,7 +43,6 @@ func _now() -> String:
 	var minute = _leading_zero(dt["minute"])
 	var second = _leading_zero(dt["second"])
 	return "%s-%s-%s %s:%s:%s" % [year, month, day, hour, minute, second]
-
 
 func _leading_zero(num: int) -> String:
 	if num < 10:
