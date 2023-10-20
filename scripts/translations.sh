@@ -2,7 +2,7 @@
 
 DIR="i18n"
 
-pybabel extract -F "$DIR/babelrc" -k text -k LineEdit/placeholder_text -k tr -k items --no-location -o "$DIR/messages.pot" \
+pybabel extract -F "$DIR/babelrc" -k text -k LineEdit#placeholder_text -k tr -k tooltip_text -k items --no-location -o "$DIR/messages.pot" \
     godot/src
 
 cd $DIR
