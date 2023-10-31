@@ -10,7 +10,7 @@
   "selected": "",
   "should_exit": true,
   "should_maximize": true,
-  "suffix": "Test.gd",
+  "suffix": "_test.gd",
   "tests": [],
   "unit_test_name": ""
 }

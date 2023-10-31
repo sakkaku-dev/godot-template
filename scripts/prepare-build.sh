@@ -14,7 +14,7 @@ if [ -z "$CLIENT_VERSION" ]; then
 	fi
 fi
 
-cat << EOF > godot/addons/debug/Build.gd
+cat << EOF > godot/src/env/Build.gd
 class_name Build
 
 const VERSION = '$CLIENT_VERSION'

@@ -11,4 +11,5 @@ sed -e "/GAME=/ s/\".*\"/\"$GAME_NAME\"/" -i scripts/publish.sh
 sed -i "s/##VAR_GAME_NAME/$GAME_NAME/g" .github/workflows/release.yml
 sed -i "s/##VAR_GAME_NAME/$GAME_NAME/g" package.json
 
-echo "#$GAME_NAME" > README.md
+echo "# $GAME_NAME" > README.md
+git update-index --assume-unchanged src/env/Build.gd
