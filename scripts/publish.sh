@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Deps:
-# generate-changelog
+# conventional-changelog-cli
 # github-cli
 # butler
 
@@ -15,7 +15,7 @@ CHANGELOG=""
 
 generate_changelog() {
     echo "Generating changelog"
-    changelog -t $LAST_TAG -f CHANGELOG.md
+    npm run changelog
     CHANGELOG=$(cat CHANGELOG.md)
     rm CHANGELOG.md
 }
