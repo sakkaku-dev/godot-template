@@ -12,6 +12,3 @@
       - `BUTLER_API_KEY` and `ITCHIO_USER` env key needs to be set
 
 - `test` - run GUT test files inside the project on the master branch
-
-- `web` - manually deploy a web version to github pages
-  - github pages needs to be enabled on the repository

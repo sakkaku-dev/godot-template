@@ -1,9 +1,14 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Game Version'
+        required: true
+  # push:
+  #   tags:
+  #     - "v*.*.*"
 
 jobs:
   release:
@@ -17,6 +22,7 @@ jobs:
       GAME: ##VAR_GAME_NAME
       CHANNEL: ${{matrix.channel}}
       GODOT_VERSION: 4.1
+      GAME_VERSION: ${{ github.event.inputs.message || GITHUB_REF_NAME }} # TODO: check if this works
     steps:
       - uses: actions/checkout@v3
         with:
@@ -25,7 +31,7 @@ jobs:
         run: ./scripts/prepare-templates.sh $GODOT_VERSION
 
       - name: Prepare Build
-        run: ./scripts/prepare-build.sh $GITHUB_REF_NAME
+        run: ./scripts/prepare-build.sh ${{env.GAME_VERSION}}
 
       - name: Build
         run: ./scripts/build-channel.sh $CHANNEL
@@ -36,7 +42,7 @@ jobs:
         env:
           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
           USER: ${{secrets.ITCHIO_USER}}
-        run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion $GITHUB_REF_NAME
+        run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion ${{env.GAME_VERSION}}
 
       - name: Package builds
         if: env.CHANNEL != 'mac'
