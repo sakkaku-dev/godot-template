@@ -63,19 +63,4 @@ func change_scene(scene, transition = null, speed = DEFAULT_SPEED):
 	transitioning = false
 	await anim.animation_finished
 
-	emit_signal("scene_changed")
-
-# func _fade(reverse: bool, transition, speed: float):
-# 	var eff = Effect.new()
-# 	var start = 1.0 if reverse else 0.0
-# 	var end = 0.0 if reverse else 1.0
-# 	eff.setup_props("shader_parameter/dissolve_amount", start, end)
-# 	var mat: ShaderMaterial = rect.get_material()
-# 	if transition:
-# 		mat.set("shader_parameter/dissolve_texture", load(SHADER_DIR + "/" + TRANSITION_MAP[transition]))
-# 	mat.set("shader_parameter/fade", transition == null)
-# 	eff.obj = mat
-	
-# 	eff.duration = speed
-# 	add_child(eff)
-# 	await eff.finished
+	scene_changed.emit()

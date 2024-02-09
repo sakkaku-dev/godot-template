@@ -12,12 +12,13 @@ After creating the repository with this template do the following:
 - If releasing on android
   - Run `scripts/android-keystore.sh <GAME_NAME>`
 
-## Features
+## Publish
 
-- [Continuous Integration](./.github/FEATURES.md)
-- [Internationalization](./addons/i18n/README.md)
-- [Input System](./addons/input-system/README.md)
-- [Save System](./addons/save-system/README.md)
-- [Menu System](./addons/menu-system/README.md)
-- [Scene Manager](./addons/scene-manager/README.md)
-- [Debug](./addons/debug/README.md)
+Run the script `./scripts/publish.sh` to build and release on different platforms.
+Update the `CHANNELS` variable to your supported platforms.
+Dependencies needed are listed at the top of the file
+
+- github: `./scripts/publish.sh v1.0.0`
+- itch: `./scripts/publish.sh v1.0.0 itch <ITCH_USER>`
+- steam: `./scripts/publish.sh v1.0.0 steam <STEAM_USER>`
+  - needs to be configured inside the `.vdf` files

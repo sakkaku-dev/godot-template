@@ -1,0 +1,31 @@
+"AppBuild"
+{
+	"AppID" "2777140" // your AppID
+	"Desc" "Build script for Inside the machine" // internal description for this build
+
+	"ContentRoot" "../build/" // root content folder, relative to location of this file
+	"BuildOutput" "../build/output" // build output folder for build logs and build cache files
+
+	"Depots"
+	{
+		"2777141" // Windows
+		{
+			"FileMapping"
+			{
+				"LocalPath" "win/*" // all files from contentroot folder
+				"DepotPath" "." // mapped into the root of the depot
+				"recursive" "1" // include all subfolders
+			}
+		}
+
+		"2777142" // Linux
+		{
+			"FileMapping"
+			{
+				"LocalPath" "linux/*" // all files from contentroot folder
+				"DepotPath" "." // mapped into the root of the depot
+				"recursive" "1" // include all subfolders
+			}
+		}
+	}
+}
