@@ -1,3 +1,4 @@
+class_name DeviceSwitcher
 extends Node
 
 @export var input: PlayerInput
@@ -5,12 +6,13 @@ extends Node
 var logger = Logger.new("DeviceSwitcher")
 
 func _unhandled_input(event: InputEvent):
-	if input == null or event.device != input.device_id or input.is_player_event(event):
+	if input == null or input.is_player_event(event):
+		return
+		
+	if event is InputEventMouseMotion or event is InputEventAction:
 		return
 
-	var joypad = event is InputEventJoypadButton
+	# motion has some small flickering
+	var joypad = event is InputEventJoypadButton or (event is InputEventJoypadMotion and event.axis_value > 0.7)
 	if input.joypad != joypad:
-		logger.info(
-			"Changing device %s to %s" % [input.device_id, "controller" if joypad else "keyboard"]
-		)
 		input.joypad = joypad
