@@ -1,3 +1,3 @@
 #!/bin/sh
 
-convert Icon.png -resize 32x32 Icon.ico 
+convert icon.png -define icon:auto-resize=256,128,64,48,32,16 icon.ico
