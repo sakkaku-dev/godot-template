@@ -1,48 +1,40 @@
 name: Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Game Version'
-        required: true
-  # push:
-  #   tags:
-  #     - "v*.*.*"
+  push:
+    tags:
+      - "v*.*.*"
 
 jobs:
   release:
     runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:4.1.1
+      image: barichello/godot-ci:4.3
     strategy:
       matrix:
-        channel: [win, linux, web, macOS]
+        channel: [web, win, linux]
     env:
       GAME: ##VAR_GAME_NAME
       CHANNEL: ${{matrix.channel}}
-      GODOT_VERSION: 4.1
-      GAME_VERSION: ${{ github.event.inputs.message || GITHUB_REF_NAME }} # TODO: check if this works
+      GODOT_VERSION: 4.3
     steps:
-      - uses: actions/checkout@v3
-        with:
-          lfs: true
+      - uses: actions/checkout@v4
       - name: Setup Templates
         run: ./scripts/prepare-templates.sh $GODOT_VERSION
 
       - name: Prepare Build
-        run: ./scripts/prepare-build.sh ${{env.GAME_VERSION}}
+        run: ./scripts/prepare-build.sh $GITHUB_REF_NAME
 
       - name: Build
         run: ./scripts/build-channel.sh $CHANNEL
 
       - name: Publish Itch
-        if: env.BUTLER_API_KEY && env.USER && env.GAME && !contains(github.ref, '-rc')
+        if: env.BUTLER_API_KEY && env.USER && env.GAME && !contains(github.ref, '-rc') && env.CHANNEL == 'web'
         shell: bash
         env:
           BUTLER_API_KEY: ${{secrets.BUTLER_API_KEY}}
           USER: ${{secrets.ITCHIO_USER}}
-        run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion ${{env.GAME_VERSION}}
+        run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion $GITHUB_REF_NAME
 
       - name: Package builds
         if: env.CHANNEL != 'mac'
@@ -50,29 +42,29 @@ jobs:
           cd build
           mv $CHANNEL $GAME && zip -r $GAME-$CHANNEL.zip $GAME
 
-      # Upload exported build
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: release
+          name: release-${{ matrix.channel }}
           path: build/**/*.zip
 
   github-release:
     runs-on: ubuntu-latest
     needs: release
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - run: echo "latest_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
       - run: echo "prev_tag=$(git tag | sort --version-sort | tail -n2 | head -1)" >> $GITHUB_ENV
       - run: npm ci && npm run changelog -- -t ${{env.prev_tag}}..${{env.latest_tag}}
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
-          name: release
+          pattern: release-*
+          merge-multiple: true
       - name: Release
         uses: softprops/action-gh-release@v1
         with:

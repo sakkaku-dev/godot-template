@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Env="*res://src/env/Env.gd"
+GameManager="*res://src/autoload/game_manager.gd"
 SceneManager="*res://addons/scene-manager/SceneManager.tscn"
 
 [debug]

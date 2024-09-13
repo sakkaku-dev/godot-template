@@ -1,12 +1,18 @@
 class_name Logger
 
+const COLORS = {
+	Level.ERROR: Color.RED,
+	Level.WARN: Color.YELLOW,
+	Level.INFO: Color.BLUE,
+	Level.DEBUG: Color.GREEN,
+}
+
 enum Level {
 	OFF,
 	ERROR,
 	WARN,
 	INFO,
 	DEBUG,
-	TRACE,
 }
 
 var name = ""
@@ -26,13 +32,11 @@ func error(msg: String):
 func debug(msg: String):
 	_log_for_level(Level.DEBUG, msg)
 
-func trace(msg: String):
-	_log_for_level(Level.TRACE, msg)
-
 func _log_for_level(level: int, msg: String):
 	if level <= Env.log_level:
-		var text = "[%s - %s]: %s" % [_now(), name, msg]
-		print(text)
+		var text = "[%s] [color=%s]%s[/color] %s: %s" % [_now(), COLORS[level].to_html(), Level.keys()[level], name, msg]
+		print_rich(text)
+		GameManager.logged.emit(text)
 
 func _now() -> String:
 	var dt = Time.get_datetime_dict_from_system()
