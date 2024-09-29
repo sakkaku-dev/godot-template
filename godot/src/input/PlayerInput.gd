@@ -14,7 +14,7 @@ const Device = {
 @export var device_id = 0
 
 var _device := Device.KEYBOARD
-var _logger = Logger.new()
+var _logger = Logger.new("PlayerInput")
 
 func _set_joypad(is_joypad: bool):
 	joypad = is_joypad
@@ -28,7 +28,7 @@ func _set_joypad(is_joypad: bool):
 	device_switched.emit()
 
 func _get_simplified_device(raw_name: String) -> String:
-	logger.debug("Detecting controller type from name: %s" % raw_name)
+	_logger.debug("Detecting controller type from name: %s" % raw_name)
 
 	var n = raw_name.to_lower()
 	if n.contains("xbox") or n.contains("microsoft"):

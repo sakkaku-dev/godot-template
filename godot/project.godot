@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="##VAR_GAME_NAME"
+config/name="godot-template"
 run/main_scene="res://src/game.tscn"
 config/features=PackedStringArray("4.2")
 boot_splash/bg_color=Color(0.101961, 0.101961, 0.101961, 1)

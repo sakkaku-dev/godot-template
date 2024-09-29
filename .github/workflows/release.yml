@@ -14,7 +14,7 @@ jobs:
       matrix:
         channel: [web, win, linux]
     env:
-      GAME: ##VAR_GAME_NAME
+      GAME: godot-template
       CHANNEL: ${{matrix.channel}}
       GODOT_VERSION: 4.3
     steps:

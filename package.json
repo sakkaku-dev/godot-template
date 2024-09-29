@@ -1,5 +1,5 @@
 {
-	"name": "holo-crush",
+	"name": "godot-template",
 	"version": "0.0.0",
 	"description": "",
 	"main": "index.js",
@@ -7,7 +7,7 @@
 		"changelog": "conventional-changelog -p angular -o CHANGELOG.md"
 	},
 	"author": "",
-	"license": "ISC",
+	"license": "MIT",
 	"devDependencies": {
 		"conventional-changelog-cli": "^4.1.0"
 	}

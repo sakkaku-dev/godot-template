@@ -1,8 +1,16 @@
 # Godot Template
 
-Custom template for godot games for godot 4
+My custom template for godot games using godot 4
 
-use branch `godot-3.x` for godot 3, but it might not be up-to-date with the latest features
+### TODO
+- Discord Integration
+  - Send Changelogs
+  - Link/Send Build Files?
+- Steam release workflow
+
+
+
+# (maybe) deprecated stuff
 
 ## Setup
 
