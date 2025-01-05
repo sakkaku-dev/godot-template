@@ -5,9 +5,5 @@ _sprites/
 node_modules
 
 # Asset files are mostly gonna be protected
-godot/assets/**/*.mp3
-godot/assets/**/*.wav
-godot/assets/**/*.png
-godot/assets/**/*.ttf
-godot/assets/**/*.glb
-godot/assets/**/*.gltf
+godot/assets/**/*.*
+!godot/assets/**/*.import
